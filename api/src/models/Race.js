@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
+const { capitalizeString } = require('../routes/Race/functions');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('race', {
@@ -13,7 +14,7 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
         set(value) {
-          this.setDataValue('name', value[0].toUpperCase() + value.slice(1)) //function
+          this.setDataValue('name', capitalizeString(value)) //function
         }
     },
     height:{
