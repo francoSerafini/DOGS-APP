@@ -3,36 +3,33 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('raza', {
+  sequelize.define('race', {
     id: {
-      type: DataTypes.INTEGER,
-      auntoIncrement: true,
+      type: DataTypes.STRING,
       primaryKey: true,
-      unique: true,
-      set(value) {
-        this.setDataValue('id', value + 'db')
-      }
     },
-    nombre: {
+    name: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
         set(value) {
-          this.setDataValue('nombre', value.toUpperCase())
+          this.setDataValue('name', value[0].toUpperCase() + value.slice(1)) //function
         }
     },
-    altura:{
+    height:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    peso:{
+    weight:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    anios: {
-        type: DataTypes.STRING
+    life_span: {
+        type: DataTypes.STRING,
+        defaultValue: 'null life_span'
     }, 
   }, {
         timestamps: false
     });
 };
+
