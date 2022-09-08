@@ -3,17 +3,12 @@ const axios = require('axios');
 const { API_KEY } = process.env;
 const { Race, Temperament, Op } = require('../../db');
 
-
-const getDogById = async (req, res) => {
-    let id = req.params.idRace;
+const apiFindDog = async function(id) {
     let dog;
-
-    try {
-        if(!isNaN(id)){  //Si no puede convertir el id lo busca en la API externa
-            await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+    await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
             .then(response => response.data)
             .then(data => {
-                dog = data.find(p => p.id == id);
+                dog = data.find(dog => dog.id == id);
             });
             if (dog) {
                 dog = {
@@ -23,35 +18,56 @@ const getDogById = async (req, res) => {
                     life_span: dog.life_span,
                     temperament: dog.temperament,
                     image: dog.image ? dog.image.url : 'Not Found'
-                }
+                };
+            };
+            return dog;
+};
+
+const concatTemperamentsSingle = function(dog) {
+    let temp = '';
+    for (let i = 0; i < dog.temperaments.length; i++) {
+        if(i < dog.temperaments.length - 1) {
+            temp = temp.concat(dog.temperaments[i].name, ', '); 
+        }
+        else temp = temp.concat(dog.temperaments[i].name); // caso de borde;
+    }
+    dog.dataValues.temperaments = temp;
+}; 
+
+const dbFindDog = async function(id) {
+    let dog;
+    dog = await Race.findOne( ({
+        where: {id: id},
+        attributes: ['name', 'weight', 'height', 'life_span'],
+        include: [{  
+            model: Temperament,
+            attributes: ['name'],
+            through: {
+                attributes: []
             }
+        }]
+    }))
+    if(dog) {
+        concatTemperamentsSingle(dog);
+      };
+    return dog;
+}
+
+
+
+const getDogById = async (req, res) => {
+    let id = req.params.idRace;
+    let dog;
+    try {
+        if(!isNaN(id)){  //Si no puede convertir el id lo busca en la API externa
+            dog = await apiFindDog(id);
         }
         else {
-            dog = await Race.findOne( ({
-                where: {id: id},
-                attributes: ['name', 'weight', 'height', 'life_span'],
-                include: [{  
-                    model: Temperament,
-                    attributes: ['name'],
-                    through: {
-                        attributes: []
-                    }
-                }]
-            }))
-            if(dog) {
-                let temp = '';
-                for (let i = 0; i < dog.temperaments.length; i++) {
-                    if(i < dog.temperaments.length - 1) {
-                        temp = temp.concat(dog.temperaments[i].name, ', '); 
-                    }
-                    else temp = temp.concat(dog.temperaments[i].name); // caso de borde;
-                }
-                dog.dataValues.temperaments = temp;
-            }; 
-        };
-        dog ? 
+            dog = await dbFindDog(id);
+            dog ? 
                 res.status(200).send(dog) 
                 : res.sendStatus(404);
+        }
     }     
     catch(err) {
         res.send(err.message);
