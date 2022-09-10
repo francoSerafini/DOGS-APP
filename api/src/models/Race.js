@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
-const { capitalizeString } = require('../routes/Race/functions');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('race', {
@@ -14,7 +13,7 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
         set(value) {
-          this.setDataValue('name', capitalizeString(value)) //function
+          this.setDataValue('name', value.split('').map(w => w[0].toUpperCase() + w.slice(1)).join('')) //function
         }
     },
     height:{
@@ -28,7 +27,11 @@ module.exports = (sequelize) => {
     life_span: {
         type: DataTypes.STRING,
         defaultValue: 'null life_span'
-    }, 
+    },
+    image:{
+      type: DataTypes.TEXT,
+      defaultValue: 'https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/EDF3KKJZQBFP5EYYTL6GJPRVZ4.jpg'
+    },  
   }, {
         timestamps: false
     });
