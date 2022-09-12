@@ -3,6 +3,7 @@ const axios = require('axios');
 export const GET_DOGS = 'GET_DOGS';
 export const GET_DOG_DETAIL = 'GET_DOG_DETAIL';
 export const CREATE_DOG = 'CREATE_DOG';
+export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 
 export function getDogs(name) {
     return function(dispatch) {
@@ -28,7 +29,7 @@ export function getDogs(name) {
         };
     };
 };
-
+    
 export function getDogDetail(id) {
     return function(dispatch) {
         return (axios(`http://localhost:3001/dogs/${id}`)
@@ -42,7 +43,7 @@ export function getDogDetail(id) {
     };
 };
 
-export function create_dogs(data) {
+export function createDogs(data) {
     return function(dispatch) {
         return (axios.post('http://localhost:3001/dogs', data)
         .then(data => {
@@ -51,5 +52,18 @@ export function create_dogs(data) {
                 payload: data
             });
         }));
+    };
+};
+
+export function getTemperaments() {
+    return function(dispatch) {
+        return (axios('http://localhost:3001/temperaments'))
+        .then(response => response.data)
+        .then(data => {
+            dispatch({
+                type: GET_TEMPERAMENTS, 
+                payload: data
+            });
+        });
     };
 };

@@ -6,6 +6,15 @@ const { createTemperaments } = require('../Temperament/controller');
 
 let cont = 0;
 
+const image = function(dog) {
+    if (dog.image)
+        return dog.image.url;  
+    else if (dog.reference_image_id)
+        return `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`;
+    else
+        return 'not found';
+};
+
 const apiFindDogById = async function(id) {
     let dog;
     await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
@@ -58,16 +67,9 @@ const dbFindDog = async function(id) {
 
 const concatTemperamentsMulti = function(dogs) {
     for (let i = 0; i < dogs.length; i++) {
-        let temp = '';
-        for (let a = 0; a < dogs[i].temperaments.length; a++) {
-            if (i < dogs[i].temperaments.length - 1) {
-                temp = temp.concat(dogs[i].temperaments[a].name, ', ');
-            }
-            else temp = temp.concat(dogs[i].temperaments[a].name);
-        };
-        dogs[i].dataValues.temperaments = temp;
+        concatTemperamentsSingle(dogs[i]);
     };
-}
+};
 
 const apiAllDogs = async function(endPoint) {
     let dogs = [];
@@ -80,7 +82,8 @@ const apiAllDogs = async function(endPoint) {
             height: dog.height.metric,
             weight: dog.weight.metric,
             temperaments: dog.temperament,
-            image: dog.image ? dog.image.url : `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`
+            image : image(dog)
+            //image: dog.image ? dog.image.url : `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`
             }),
         );
     });
@@ -132,7 +135,7 @@ const getDogById = async (req, res) => {
             dog = await dbFindDog(id);
         }
         dog ? 
-            res.status(200).send(dog) 
+            res.status(200).send(dog)   
             : res.sendStatus(404);
     }     
     catch(err) {
@@ -144,14 +147,14 @@ const getAllDogs = async (req, res) => {
     let race = req.query.name;
     let allRaces = [];
     if(race) {
-        race = race.split('').map(w => w[0].toUpperCase() + w.slice(1)).join('');
+        race = race.toLowerCase().split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
         try {
             allRaces = allRaces.concat(await apiAllDogs(`https://api.thedogapi.com/v1/breeds/search?q=${race}&api_key=${API_KEY}`));
             let allRacesDb = await dbAllDogsByFilter(race);
             allRaces = allRaces.concat(allRacesDb);
             let notFound = [{
                 id:'xxx', 
-                name: 'The dog does not exist in our database.', 
+                name: 'There is no race that contains ' + race, 
                 image: 'https://c8.alamy.com/compes/2ejmtjf/la-persona-con-cabeza-de-perro-esta-consusa-sobre-algo-concepto-de-consusion-2ejmtjf.jpg'
             }]
             if (allRaces.length === 0) return res.send(notFound);

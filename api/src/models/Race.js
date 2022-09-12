@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
         set(value) {
-          this.setDataValue('name', value.split('').map(w => w[0].toUpperCase() + w.slice(1)).join('')) //function
+          this.setDataValue('name', value.toLowerCase().split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ')) 
         }
     },
     height:{
