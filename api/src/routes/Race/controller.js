@@ -153,7 +153,7 @@ const getAllDogs = async (req, res) => {
             let allRacesDb = await dbAllDogsByFilter(race);
             allRaces = allRaces.concat(allRacesDb);
             let notFound = [{
-                id:'xxx', 
+                id:'notFound', 
                 name: 'There is no race that contains ' + race, 
                 image: 'https://c8.alamy.com/compes/2ejmtjf/la-persona-con-cabeza-de-perro-esta-consusa-sobre-algo-concepto-de-consusion-2ejmtjf.jpg'
             }]

@@ -4,15 +4,33 @@ import React from 'react';
 const BaseSelect = (props) => {
 
     function handleChange(event) {
-        let filtered = props.dogs;
-        props.dispatch(props.getDogs());
+
+        let filtered = props.states.filteredDogs.length !== 0 ?
+            props.states.filteredDogs : props.dogs;
+
         let dogsData = [];
-        if(event.target.value === 'DataBase' ) dogsData = filtered.lenght !== 0 ? filtered.filter(d => isNaN(d.id)) : props.dogs.filter(d => isNaN(d.id));
-        else if(event.target.value === 'Api') dogsData = filtered.lenght !== 0 ? filtered.filter(d => !isNaN(d.id)) : props.dogs.filter(d => !isNaN(d.id));
+
+        if(event.target.value === 'DataBase' ) {
+            dogsData = filtered.filter(d => isNaN(d.id));
+            if (dogsData.length === 0) { // si no coincidencias devuelvve todos
+                dogsData = props.dogs;
+                console.log('dogsData')
+                alert('no matchs for that filters');
+            };
+        }
+        
+        else if(event.target.value === 'Api') {     
+            dogsData = filtered.filter(d => !isNaN(d.id)) 
+            if (dogsData.length === 0) { // si no coincidencias devuelvve todos
+                dogsData = props.dogs;
+                alert('no matchs for that filters');
+            };
+        }
+
         else {
             dogsData = props.dogs;
-            alert('no matchs for thath filters'); //revisar y tratar de filtrar todo completo
         }
+
         props.setStates({
             ...props.states,
             filteredDogs: dogsData
@@ -24,7 +42,7 @@ const BaseSelect = (props) => {
             name='base'
             id='db'
             onChange={ handleChange }>
-            <option value = 'AllDB'>All DB</option>    
+            <option value = 'AllDB'>All</option>    
             <option value = 'DataBase'>Data Base</option>                   
             <option value = 'Api'>External API</option>
         </select>

@@ -43,8 +43,6 @@ const Dogs = () => {
                         dogs={dogs}
                         states={state}
                         setStates={setState}
-                        getDogs={getDogs}
-                        dispatch={dispatch}
                     />              
                 </div> 
                 <div>
@@ -52,7 +50,6 @@ const Dogs = () => {
                         dogs={dogs}
                         states={state}
                         setStates={setState} 
-                        getDogs={getDogs}
                         dispatch={dispatch}
                     />
                 </div>
