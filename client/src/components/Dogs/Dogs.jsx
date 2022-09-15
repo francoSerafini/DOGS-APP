@@ -1,17 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDogs, getTemperaments } from '../../actions';
-import { DogsCard }  from '../DogsCard/DogsCard';
+import { DogsCard } from '../DogsCard/DogsCard';
 import TemperamentsSelect from '../TemperamentsSelect/TemperamentsSelect';
 import BaseSelect from '../BaseSelect/BaseSelect';
 import SearchBar from '../SearchBar/SearchBar';
-import ToggleName from '../ToggleName/ToggleName';
+import ToggleButtons from '../ToggleButtons/ToggleButtons';
 
 const Dogs = () => {
 
     const [state, setState] = React.useState({ filteredDogs: [] });
     const dispatch = useDispatch();
     let dogs = useSelector(state => state.dogs);
+    
     
     React.useEffect(() => { 
         dispatch(getDogs())
@@ -32,7 +33,7 @@ const Dogs = () => {
                     />
                 </div>
                 <div>
-                    <ToggleName
+                    <ToggleButtons
                         dogs={dogs}
                         states={state}
                         setStates={setState}

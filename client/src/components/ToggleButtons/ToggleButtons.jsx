@@ -2,7 +2,7 @@ import React from 'react';
 
 let toggle = true;
 
-const ToggleName = (props) => {
+const ToggleButtons = (props) => {
 
     let dogs = props.states.filteredDogs.length !== 0 ? 
     props.states.filteredDogs :
@@ -18,6 +18,7 @@ const ToggleName = (props) => {
     })();
 
     function toggleDogs(prop) {
+        
         if(toggle) {
             dogs = dogs.sort(
                 function (a, b) {
@@ -81,4 +82,4 @@ const ToggleName = (props) => {
     );
 };
 
-export default ToggleName;
+export default ToggleButtons;
