@@ -1,12 +1,12 @@
 import React from 'react';
 
-let toggle = true;
-
 const ToggleButtons = (props) => {
 
     let dogs = props.states.filteredDogs.length !== 0 ? 
     props.states.filteredDogs :
     props.dogs;
+
+    const [toggle, setToggle] = React.useState({ name: 'A-Z', value: true });
 
     (function(){
         if(dogs[0] && dogs[0].id !== "notFound") {
@@ -19,14 +19,14 @@ const ToggleButtons = (props) => {
 
     function toggleDogs(prop) {
         
-        if(toggle) {
+        if(toggle.value) {
             dogs = dogs.sort(
                 function (a, b) {
                     if (a[prop] > b[prop]) return 1;
                     if (a[prop] < b[prop]) return -1;
                     return 0;
                 }, prop);
-            toggle = false;
+            setToggle({name: 'A-Z', value: false });
         }
 
         else {
@@ -36,9 +36,8 @@ const ToggleButtons = (props) => {
                     if (a[prop] < b[prop]) return 1;
                     return 0;
                 }, prop);
-            toggle = true;
+            setToggle({ name: 'Z-A', value: true });
         };
-
         return dogs;
     };
     
@@ -56,7 +55,7 @@ const ToggleButtons = (props) => {
         <div>
             <div>
                 <label className="toggleNames">
-                    <span>A-Z</span>
+                    <span>{toggle.name}</span>
                     <input 
                         type="checkbox"
                         id="az"

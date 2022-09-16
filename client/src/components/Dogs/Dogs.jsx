@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDogs, getTemperaments } from '../../actions';
-import { DogsCard } from '../DogsCard/DogsCard';
 import TemperamentsSelect from '../TemperamentsSelect/TemperamentsSelect';
 import BaseSelect from '../BaseSelect/BaseSelect';
 import SearchBar from '../SearchBar/SearchBar';
 import ToggleButtons from '../ToggleButtons/ToggleButtons';
+import Paginated from '../Paginated/Paginated';
 
 const Dogs = () => {
 
@@ -55,15 +55,8 @@ const Dogs = () => {
                     />
                 </div>
                 <div>
-                { dogsToShow && dogsToShow.map( dog =>
-                    <DogsCard
-                        key={dog.id}
-                        name={dog.name}
-                        image={dog.image}
-                        temperaments={dog.temperaments}
-                        weight={dog.weight}
-                    />) 
-                }
+                    <Paginated
+                        dogsToShow={dogsToShow}/>
                 </div>
             </div>
         );
