@@ -42,6 +42,27 @@ const Paginated = (props) => {
             return (
                 <div>
                     {items.length && items.map( dog =>
+                        dog.id !== 'notFound' ? 
+                            <Link to={`/dogDetail/${dog.id}`} key={dog.id}>
+                                <DogsCard
+                                    key={dog.id}
+                                    name={dog.name}
+                                    image={dog.image}
+                                    temperaments={dog.temperaments}
+                                    weight={dog.weight}/>
+                            </Link> :
+                            <DogsCard
+                                key={dog.id}
+                                name={dog.name}
+                                image={dog.image}
+/>)}
+                </div>
+            );
+        }
+        else {
+            return(    
+                dogsToShow && [...dogsToShow].splice(0, 8).map( dog =>
+                    dog.id !== 'notFound' ?
                         <Link to={`/dogDetail/${dog.id}`} key={dog.id}>
                             <DogsCard
                                 key={dog.id}
@@ -49,21 +70,11 @@ const Paginated = (props) => {
                                 image={dog.image}
                                 temperaments={dog.temperaments}
                                 weight={dog.weight}/>
-                        </Link>)}
-                </div>
-            );
-        }
-        else {
-            return(
-                dogsToShow && [...dogsToShow].splice(0, 8).map( dog =>
-                    <Link to={`/dogDetail/${dog.id}`} key={dog.id}>
+                        </Link> :
                         <DogsCard
-                            key={dog.id}
-                            name={dog.name}
-                            image={dog.image}
-                            temperaments={dog.temperaments}
-                            weight={dog.weight}/>
-                    </Link>)
+                        key={dog.id}
+                        name={dog.name}
+                        image={dog.image}/>) 
             );
         };
     };
