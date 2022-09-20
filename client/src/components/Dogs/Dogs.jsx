@@ -10,9 +10,9 @@ import Paginated from '../Paginated/Paginated';
 const Dogs = () => {
 
     const [state, setState] = React.useState({ filteredDogs: [] });
+    const [order, setOrder] = React.useState(false);
     const dispatch = useDispatch();
     let dogs = useSelector(state => state.dogs);
-    
     
     React.useEffect(() => { 
         dispatch(getDogs())
@@ -37,6 +37,8 @@ const Dogs = () => {
                         dogs={dogs}
                         states={state}
                         setStates={setState}
+                        order={order}
+                        setOrder={setOrder}
                     />
                 </div>
                 <div>
@@ -56,7 +58,8 @@ const Dogs = () => {
                 </div>
                 <div>
                     <Paginated
-                        dogsToShow={dogsToShow}/>
+                        dogsToShow={dogsToShow}
+                        order={order}/>
                 </div>
             </div>
         );

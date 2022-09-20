@@ -193,12 +193,12 @@ const postDog = async (req, res) => {
     try {
         const newRace = await Race.create(req.body);
         await newRace.setTemperaments(req.body.temperament);
-        cont++;
         res.sendStatus(201);
     } catch(err) {
         res.status(404);
         res.send(err.message);
     };
+    cont++;
 };
 
 module.exports = { 

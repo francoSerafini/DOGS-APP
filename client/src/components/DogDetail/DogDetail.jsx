@@ -23,7 +23,7 @@ const DogDetail = (props) => {
                 <img src={dog.image} alt='Not Found'></img>
             </div>
 
-        </div>
+        </div>   
     );
 };
 

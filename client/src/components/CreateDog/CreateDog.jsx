@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { createDogs } from "../../actions";
+import { useDispatch, useSelector } from 'react-redux';
+import { createDogs, getTemperaments } from "../../actions";
 
 const CreateDog = () => {
 
     const dispatch = useDispatch();
-    const [breedName, setBreedname] = useState('');
-    const [weightMin, setWeightMin] = useState('');
-    const [weightMax, setWeightMax] = useState('');
-    const [heightMin, setHeightMin] = useState('');
-    const [heightMax, setHeightMax] = useState('');
-    const [lifeSpanMin, setLifeSpanMin] = useState('');
-    const [lifeSpanMax, setLifeSpanMax] = useState('');
-    const [image, setImage] = useState('');
+
+    React.useEffect(() => { 
+        dispatch(getTemperaments())
+        .catch(err => err.message)}, [ dispatch ]);
+
+    const temperaments = useSelector(state => state.temperaments);
+    let selectedTemperaments = [];
+    const [temperamentsToShow, setTemperamentsToShow] = useState({temperamentsToShow: []});
+    const [breedName, setBreedname] = useState(undefined);
+    const [weightMin, setWeightMin] = useState(undefined);
+    const [weightMax, setWeightMax] = useState(undefined);
+    const [heightMin, setHeightMin] = useState(undefined);
+    const [heightMax, setHeightMax] = useState(undefined);
+    const [lifeSpanMin, setLifeSpanMin] = useState(undefined);
+    const [lifeSpanMax, setLifeSpanMax] = useState(undefined);
+    const [image, setImage] = useState(undefined);
     const [errorBreed, setErrorBreed] = useState('');
     const [errorWeightMin, setErrorWeightMin] = useState('');
     const [errorWeightMax, setErrorWeightMax] = useState('');
@@ -122,24 +130,40 @@ const CreateDog = () => {
         setImage(value);
     };
 
+    function handleChange(event) {
+        let index = temperaments.indexOf(event.target.value) + 1;
+        if(selectedTemperaments.indexOf(index) !== -1) return alert('Repeated temperament');
+        if(index !== 0){
+            selectedTemperaments.push(index);
+            setTemperamentsToShow(temperamentsToShow.temperamentsToShow.push(event.target.value));  //revisar
+            console.log(typeof temperamentsToShow)
+        };
+        console.log(selectedTemperaments, temperamentsToShow);
+    };
+
     function formError() {
-       return !(errorBreed || errorHeightMin || errorHeightMax || errorWeightMin ||
+       return (errorBreed || errorHeightMin || errorHeightMax || errorWeightMin ||
             errorWeightMax || errorLifeSpanMin || errorLifeSpanMax || errorImage
-            || !breedName || !heightMin || !heightMax || !weightMin || !weightMax)};
+            || !breedName || !heightMin || !heightMax || !weightMin || !weightMax)
+        };
 
     function handleSubmit(e) {
         const height = heightMin + ' - ' + heightMax;
         const weight = weightMin + ' - ' + weightMax;
         const lifeSpan = lifeSpanMin + ' - ' + lifeSpanMax;
         e.preventDefault();
-        if(formError()) //aca me quede
-        dispatch(createDogs({
+        if(formError()) {
+            return alert('Error in any of the fields.');
+        };
+        const newBreed = {
             name: breedName,
             height: height,
             weight: weight,
-            life_span: lifeSpan,
-            image: image
-        }));
+            life_span: lifeSpanMin ? lifeSpan : undefined,
+            image: image ? image : undefined,
+            temperament: selectedTemperaments
+        };
+        dispatch(createDogs(newBreed));    
     };
     
 
@@ -164,6 +188,22 @@ const CreateDog = () => {
             {!errorLifeSpanMax ? null : <span>{errorLifeSpanMax}</span>}
             <input type="text" name="image" value={image} placeholder="Image Url" onChange={(e) => validateImage(e.target.value)}/>
             {!errorImage ? null : <span>{errorImage}</span>}
+            <select 
+                name='temperaments' 
+                id = 'temp'
+                onChange={ handleChange }>
+                    <option 
+                    key = 'All'
+                    value = 'All'>
+                    Temperaments
+                </option>
+                { temperaments && temperaments.map((temp, index) =>                            
+                    <option 
+                        key = {index} 
+                        value = {temp}>
+                        {temp}
+                    </option>) }
+            </select>
             <input type="submit" value="Submit"/>
         </form>
     )

@@ -2,19 +2,17 @@ import React from 'react';
 
 const ToggleButtons = (props) => {
 
-    let dogs = props.states.filteredDogs.length !== 0 ? 
-    props.states.filteredDogs :
-    props.dogs;
+    let dogs = props.dogs;
 
     const [toggle, setToggle] = React.useState({ name: 'A-Z', value: true });
 
     (function(){
         if(dogs[0] && dogs[0].id !== "notFound") {
             for (let i = 0; i < dogs.length; i++) {
-                dogs[i].sum = parseInt(dogs[i].weight.split(' - ')[0]) +  
-                    parseInt(dogs[i].weight.split(' - ')[1]) 
-            }
-        }
+                dogs[i].sum = (parseInt(dogs[i].weight.split(' - ')[0]) +  
+                    parseInt(dogs[i].weight.split(' - ')[1]) / 2);
+            };
+        };
     })();
 
     function toggleDogs(prop) {
@@ -38,6 +36,7 @@ const ToggleButtons = (props) => {
                 }, prop);
             setToggle({ name: 'Z-A', value: true });
         };
+        props.order === true ? props.setOrder(false) : props.setOrder(true);
         return dogs;
     };
     
