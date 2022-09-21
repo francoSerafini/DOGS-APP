@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDogs, getTemperaments } from "../../actions";
 
@@ -11,199 +12,187 @@ const CreateDog = () => {
         .catch(err => err.message)}, [ dispatch ]);
 
     const temperaments = useSelector(state => state.temperaments);
+    let temp = temperaments.map(function(t) {
+        return {value: t, label: t}
+    });
+
     let selectedTemperaments = [];
-    const [temperamentsToShow, setTemperamentsToShow] = useState({temperamentsToShow: []});
-    const [breedName, setBreedname] = useState(undefined);
-    const [weightMin, setWeightMin] = useState(undefined);
-    const [weightMax, setWeightMax] = useState(undefined);
-    const [heightMin, setHeightMin] = useState(undefined);
-    const [heightMax, setHeightMax] = useState(undefined);
-    const [lifeSpanMin, setLifeSpanMin] = useState(undefined);
-    const [lifeSpanMax, setLifeSpanMax] = useState(undefined);
-    const [image, setImage] = useState(undefined);
-    const [errorBreed, setErrorBreed] = useState('');
-    const [errorWeightMin, setErrorWeightMin] = useState('');
-    const [errorWeightMax, setErrorWeightMax] = useState('');
-    const [errorHeightMin, setErrorHeightMin] = useState('');
-    const [errorHeightMax, setErrorHeightMax] = useState('');
-    const [errorLifeSpanMin, setErrorLifeSpanMin] = useState('');
-    const [errorLifeSpanMax, setErrorLifeSpanMax] = useState('');
-    const [errorImage, setErrorImage] = useState('');
-
-
+    const [selectedOptions, setSelectedOptions] = React.useState([]);
+    const [values, setValues] = useState({});
+    const [error, setError] = useState({})
+    
     function validateBreed(value) {
-        if(value && (!/^[A-Za-z]+$/.test(value))) {
-            setErrorBreed('No numbers or special character allowed');
-        } else if(value && value.length > 15) {
-            setErrorBreed('Maximum 15 characters');
+        if(value && (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(value))) {
+            setError({...error, errorBreed: 'No numbers or special character allowed'});
+        } else if(value && value.length > 20) {
+            setError({...error, errorBreed: 'Maximum 15 characters'});
+        } else if(value && value.split(' ').length > 2) {
+            setError({...error, errorBreed: 'maximum two words'});
         } else {
-            setErrorBreed('');
+            setError({...error, errorBreed: ''});
         };
-        setBreedname(value);
+        setValues({...values, breedName: value});
     };
 
     function validateWeightMin(value) {
         if(value && (isNaN(value) || value % 1 !== 0)) {
-            setErrorWeightMin('Only intergers numbers');
+            setError({...error, errorWeightMin: 'Only intergers numbers'});
         } else if(value && value < 1) {
-            setErrorWeightMin('Min 1Kg');
+            setError({...error, errorWeightMin: 'Min 1Kg'});
         } else if(value && value > 60) {
-            setErrorWeightMin('Max 60Kg');
-        } else {
-            setErrorWeightMin('');
+            setError({...error, errorWeightMin: 'Max 60Kg'});
+        } else if(value && values.weightMax <= value) {
+            console.log(value, values.weightMax)
+            setError({...error, errorWeightMin: 'Only numbers lower than Weight max'}); 
+        } else { 
+            setError({...error, errorWeightMin: ''});
         };
-        setWeightMin(value);
+        setValues({...values, weightMin: value});
     };
 
     function validateWeighMax(value) {
         if(value && (isNaN(value) || value % 1 !== 0)) {
-            setErrorWeightMax('Only intergers numbers');
+            setError({...error, errorWeightMax: 'Only intergers numbers'});
         } else if(value && value > 90) {
-            setErrorWeightMax('Max 90Kg');
-        } else if(value && weightMin >= value){
-            setErrorWeightMax(`Only numbers greater than ${weightMin}`);
+            setError({...error, errorWeightMax: 'Max 90Kg'});
+        } else if(value && values.weightMin >= value){
+            console.log(value, values.weightMin)
+            setError({...error, errorWeightMax: `Only numbers greater than ${values.weightMin}`});
         } else {
-            setErrorWeightMax('');
+            setError({...error, errorWeightMax: ''});
         };
-        setWeightMax(value);
+        setValues({...values, weightMax: value});
     };
 
     function validateHeightMin(value) {
         if(value && (isNaN(value) || value % 1 !== 0)) {
-            setErrorHeightMin('Only intergers numbers');
+            setError({...error, errorHeightMin: 'Only intergers numbers'});
         } else if(value && value < 10) {
-            setErrorHeightMin('Min 10Cm');
-        } else if(value && value > 105) {
-            setErrorHeightMin('Max 90Cm');
+            setError({...error, errorHeightMin: 'Min 10Cm'});
+        } else if(value && value > 90) {
+           setError({...error, errorHeightMin: 'Max 90Cm'});
+        } else if(value && values.heightMax <= value){
+            setError({...error, errorHeightMin: `Only numbers lower than Height max`}); 
         } else {
-            setErrorHeightMin('');
+            setError({...error, errorHeightMin: ''});
         };
-        setHeightMin(value);
+        setValues({...values, heightMin: value});
     };
 
     function validateHeightMax(value) {
         if(value && (isNaN(value) || value % 1 !== 0)) {
-            setErrorHeightMax('Only intergers numbers');
+            setError({...error, errorHeightMax: 'Only intergers numbers'});
         } else if(value && value > 105) {
-            setErrorHeightMax('Max 105Cm');
-        } else if(value && heightMin >= value){
-            setErrorHeightMax(`Only numbers greater than ${heightMin}`);
+           setError({...error, errorHeightMax: 'Max 105Cm'});
+        } else if(value && values.heightMin >= value){
+            setError({...error, errorHeightMax: `Only numbers greater than ${values.heightMin}`});
         } else {
-            setErrorHeightMax('');
+            setError({...error, errorHeightMax: ''});
         };
-        setHeightMax(value);
+        setValues({...values, heightMax: value});
     };
 
     function validateLifeSpanMin(value) {
         if(value && (isNaN(value) || value % 1 !== 0)) {
-            setErrorLifeSpanMin('Only intergers numbers');
+            setError({...error, errorLifeSpanMin: 'Only intergers numbers'});
         } else if(value && value < 8) {
-            setErrorLifeSpanMin('Min 8 yerars');
-        } else if(value && value > 20) {
-            setErrorLifeSpanMin('Max 12 years');
+            setError({...error, errorLifeSpanMin: 'Min 8 yerars'});
+        } else if(value && value > 12) {
+            setError({...error, errorLifeSpanMin: 'Max 12 years'});
+        } else if(value && values.lifeSpanMax !== '' && values.lifeSpanMax <= value) {
+            setError({...error, errorLifeSpanMin: `Only numbers lower than Life Span max`});
         } else {
-            setErrorLifeSpanMin('');
+            setError({...error, errorLifeSpanMin: ''});
         };
-        setLifeSpanMin(value);
+        setValues({...values, lifeSpanMin: value});
     };
 
     function validateLifeSpanMax(value) {
-        console.log(value && lifeSpanMin >= value)
         if(value && (isNaN(value) || value % 1 !== 0)) {
-            setErrorLifeSpanMax('Only intergers numbers');
+            setError({...error, errorLifeSpanMax: 'Only intergers numbers'});
         } else if(value && value > 20) {
-            setErrorLifeSpanMax('Max 20 years');
-        } else if(value && lifeSpanMin >= value){
-            setErrorLifeSpanMax(`Only numbers greater than ${lifeSpanMin}`);
+            setError({...error, errorLifeSpanMax: 'Max 20 years'});
+        } else if(value && values.lifeSpanMin >= value){
+            setError({...error, errorLifeSpanMax: `Only numbers greater than ${values.lifeSpanMin}`});
         } else {
-            setErrorLifeSpanMax('');
+            setError({...error, errorLifeSpanMax: ''});
         };
-        setLifeSpanMax(value);
+        setValues({...values, lifeSpanMax: value});
     };
 
     function validateImage(value) {
         if(value && !/\.(jpg|jpeg|png|webp|avif|gif)$/.test(value)) {
-            setErrorImage('Wrong url');
+            setError({...error, errorImage: 'Wrong url'});
         } else {
-            setErrorImage('');
+            setError({...error, errorImage: ''});
         };
-        setImage(value);
+        setValues({...values, image: value});
     };
-
-    function handleChange(event) {
-        let index = temperaments.indexOf(event.target.value) + 1;
-        if(selectedTemperaments.indexOf(index) !== -1) return alert('Repeated temperament');
-        if(index !== 0){
-            selectedTemperaments.push(index);
-            setTemperamentsToShow(temperamentsToShow.temperamentsToShow.push(event.target.value));  //revisar
-            console.log(typeof temperamentsToShow)
-        };
-        console.log(selectedTemperaments, temperamentsToShow);
+    
+    function handleChange (selectedOption){
+        setSelectedOptions(selectedOption);
     };
 
     function formError() {
-       return (errorBreed || errorHeightMin || errorHeightMax || errorWeightMin ||
-            errorWeightMax || errorLifeSpanMin || errorLifeSpanMax || errorImage
-            || !breedName || !heightMin || !heightMax || !weightMin || !weightMax)
+        return (error.errorBreed || error.errorHeightMin || error.errorHeightMax || error.errorWeightMin ||
+            error.errorWeightMax || error.errorLifeSpanMin || error.errorLifeSpanMax || error.errorImage
+            || !values.breedName || !values.heightMin || !values.heightMax || !values.weightMin || !values.weightMax)
         };
 
     function handleSubmit(e) {
-        const height = heightMin + ' - ' + heightMax;
-        const weight = weightMin + ' - ' + weightMax;
-        const lifeSpan = lifeSpanMin + ' - ' + lifeSpanMax;
         e.preventDefault();
+        const height = values.heightMin + ' - ' + values.heightMax;
+        const weight = values.weightMin + ' - ' + values.weightMax;
+        const lifeSpan = values.lifeSpanMin + ' - ' + values.lifeSpanMax;
+        selectedTemperaments = selectedOptions.map(t => temperaments.indexOf(t.value) + 1);
         if(formError()) {
             return alert('Error in any of the fields.');
         };
         const newBreed = {
-            name: breedName,
+            name: values.breedName,
             height: height,
             weight: weight,
-            life_span: lifeSpanMin ? lifeSpan : undefined,
-            image: image ? image : undefined,
+            life_span: values.lifeSpanMin ? lifeSpan : undefined,
+            image: values.image ? values.image : undefined,
             temperament: selectedTemperaments
         };
-        dispatch(createDogs(newBreed));    
+        setValues({breedName:'', weightMin:'', weightMax:'', heightMin:'', heightMax:'',
+            lifeSpanMin:'', lifeSpanMax:'', image:''});    
+        dispatch(createDogs(newBreed));
+        alert('Breed created successfully');
     };
     
 
     return(
         <form onSubmit={ handleSubmit }>  
-            <input type="text" name="breedName" value={breedName} placeholder="Breed Name" onChange={(e) => validateBreed(e.target.value)}/>
-            {!errorBreed ? null : <span>{errorBreed}</span>}
-            <input type="text" name="weightMin" value={weightMin} placeholder="Weight Min" onChange={(e) => validateWeightMin(e.target.value)}/>
-            {!errorWeightMin ? null : <span>{errorWeightMin}</span>}
-            {weightMin ? <input type="text" name="weightMax" value={weightMax} placeholder="Weight Max" onChange={(e) => validateWeighMax(e.target.value)}/> :
-                <input name="weightMax" disabled="true" placeholder="Weight Max"/>} 
-            {!errorWeightMax ? null : <span>{errorWeightMax}</span>}
-            <input type="text" name="heightMin" value={heightMin} placeholder="Height Min" onChange={(e) => validateHeightMin(e.target.value)}/>
-            {!errorHeightMin ? null : <span>{errorHeightMin}</span>}
-            {heightMin ? <input type="text" name="heightMax" value={heightMax} placeholder="Height Max" onChange={(e) => validateHeightMax(e.target.value)}/> :
-                <input name="heightMax" disabled="true" placeholder="Height Max"/>}
-            {!errorHeightMax ? null : <span>{errorHeightMax}</span>}
-            <input type="text" name="lifeSpanMin" value={lifeSpanMin} placeholder="Life Span Min" onChange={(e) => validateLifeSpanMin(e.target.value)}/>
-            {!errorLifeSpanMin ? null : <span>{errorLifeSpanMin}</span>}
-            {lifeSpanMin ? <input type="text" name="lifeSpanMax" value={lifeSpanMax} placeholder="Life Span Max" onChange={(e) => validateLifeSpanMax(e.target.value)}/> :
-                <input name="lifeSpanMax" disabled="true" placeholder="Life Span Max"/>}
-            {!errorLifeSpanMax ? null : <span>{errorLifeSpanMax}</span>}
-            <input type="text" name="image" value={image} placeholder="Image Url" onChange={(e) => validateImage(e.target.value)}/>
-            {!errorImage ? null : <span>{errorImage}</span>}
-            <select 
-                name='temperaments' 
-                id = 'temp'
-                onChange={ handleChange }>
-                    <option 
-                    key = 'All'
-                    value = 'All'>
-                    Temperaments
-                </option>
-                { temperaments && temperaments.map((temp, index) =>                            
-                    <option 
-                        key = {index} 
-                        value = {temp}>
-                        {temp}
-                    </option>) }
-            </select>
+            <input type="text" name="breedName" value={values.breedName} placeholder="Breed Name" onChange={(e) => validateBreed(e.target.value)}/>
+            {!error.errorBreed ? null : <span>{error.errorBreed}</span>}
+            <input type="text" name="weightMin" value={values.weightMin} placeholder="Weight Min" onChange={(e) => validateWeightMin(e.target.value)}/>
+            {!error.errorWeightMin ? null : <span>{error.errorWeightMin}</span>}
+            <input type="text" name="weightMax" value={values.weightMax} placeholder="Weight Max" onChange={(e) => validateWeighMax(e.target.value)}/>
+            {!error.errorWeightMax ? null : <span>{error.errorWeightMax}</span>}
+            <input type="text" name="heightMin" value={values.heightMin} placeholder="Height Min" onChange={(e) => validateHeightMin(e.target.value)}/>
+            {!error.errorHeightMin ? null : <span>{error.errorHeightMin}</span>}
+            <input type="text" name="heightMax" value={values.heightMax} placeholder="Height Max" onChange={(e) => validateHeightMax(e.target.value)}/>
+            {!error.errorHeightMax ? null : <span>{error.errorHeightMax}</span>}
+            <input type="text" name="lifeSpanMin" value={values.lifeSpanMin} placeholder="Life Span Min" onChange={(e) => validateLifeSpanMin(e.target.value)}/>
+            {!error.errorLifeSpanMin ? null : <span>{error.errorLifeSpanMin}</span>}
+            <input type="text" name="lifeSpanMax" value={values.lifeSpanMax} placeholder="Life Span Max" onChange={(e) => validateLifeSpanMax(e.target.value)}/> 
+            {!error.errorLifeSpanMax ? null : <span>{error.errorLifeSpanMax}</span>}
+            <input type="text" name="image" value={values.image} placeholder="Image Url" onChange={(e) => validateImage(e.target.value)}/>
+            {!error.errorImage ? null : <span>{error.errorImage}</span>}
+            <Select
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue={'Temperaments'}
+                isLoading={false}
+                isClearable={true}
+                isSearchable={true}
+                isOptionDisabled={() => selectedOptions.length >= 5}
+                name="color"
+                options={temp}
+                isMulti
+                onChange={handleChange}/>
             <input type="submit" value="Submit"/>
         </form>
     )
