@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const BaseSelect = (props) => {
 
     function handleChange(event) {
@@ -17,20 +16,15 @@ const BaseSelect = (props) => {
                 console.log('dogsData')
                 alert('no matchs for that filters');
             };
-        }
-        
-        else if(event.target.value === 'Api') {     
+        } else if(event.target.value === 'Api') {     
             dogsData = filtered.filter(d => !isNaN(d.id)) 
             if (dogsData.length === 0) { // si no coincidencias devuelvve todos
                 dogsData = props.dogs;
                 alert('no matchs for that filters');
             };
-        }
-
-        else {
+        } else {
             dogsData = props.dogs;
-        }
-
+        };
         props.setStates({
             ...props.states,
             filteredDogs: dogsData

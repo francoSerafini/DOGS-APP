@@ -41,8 +41,7 @@ const CreateDog = () => {
             setError({...error, errorWeightMin: 'Min 1Kg'});
         } else if(value && value > 60) {
             setError({...error, errorWeightMin: 'Max 60Kg'});
-        } else if(value && values.weightMax <= value) {
-            console.log(value, values.weightMax)
+        } else if(value && (values.weightMax !== '' && values.weightMax <= value)) {
             setError({...error, errorWeightMin: 'Only numbers lower than Weight max'}); 
         } else { 
             setError({...error, errorWeightMin: ''});
@@ -51,12 +50,12 @@ const CreateDog = () => {
     };
 
     function validateWeighMax(value) {
+        console.log(value, values.weightMin, 'min')
         if(value && (isNaN(value) || value % 1 !== 0)) {
             setError({...error, errorWeightMax: 'Only intergers numbers'});
         } else if(value && value > 90) {
             setError({...error, errorWeightMax: 'Max 90Kg'});
-        } else if(value && values.weightMin >= value){
-            console.log(value, values.weightMin)
+        } else if(value && (values.weightMin !== '' && values.weightMin >= value)){
             setError({...error, errorWeightMax: `Only numbers greater than ${values.weightMin}`});
         } else {
             setError({...error, errorWeightMax: ''});
@@ -71,7 +70,7 @@ const CreateDog = () => {
             setError({...error, errorHeightMin: 'Min 10Cm'});
         } else if(value && value > 90) {
            setError({...error, errorHeightMin: 'Max 90Cm'});
-        } else if(value && values.heightMax <= value){
+        } else if(value && (values.heightMax !== '' && values.heightMax <= value)){
             setError({...error, errorHeightMin: `Only numbers lower than Height max`}); 
         } else {
             setError({...error, errorHeightMin: ''});
@@ -84,7 +83,7 @@ const CreateDog = () => {
             setError({...error, errorHeightMax: 'Only intergers numbers'});
         } else if(value && value > 105) {
            setError({...error, errorHeightMax: 'Max 105Cm'});
-        } else if(value && values.heightMin >= value){
+        } else if(value && (values.heightMin !== '' && values.heightMin >= value)){
             setError({...error, errorHeightMax: `Only numbers greater than ${values.heightMin}`});
         } else {
             setError({...error, errorHeightMax: ''});
@@ -93,13 +92,13 @@ const CreateDog = () => {
     };
 
     function validateLifeSpanMin(value) {
-        if(value && (isNaN(value) || value % 1 !== 0)) {
+        if(value && value % 1 !== 0) {
             setError({...error, errorLifeSpanMin: 'Only intergers numbers'});
         } else if(value && value < 8) {
             setError({...error, errorLifeSpanMin: 'Min 8 yerars'});
         } else if(value && value > 12) {
             setError({...error, errorLifeSpanMin: 'Max 12 years'});
-        } else if(value && values.lifeSpanMax !== '' && values.lifeSpanMax <= value) {
+        } else if(value && (values.lifeSpanMax !== '' && values.lifeSpanMax <= Number(value))) {
             setError({...error, errorLifeSpanMin: `Only numbers lower than Life Span max`});
         } else {
             setError({...error, errorLifeSpanMin: ''});
@@ -108,11 +107,11 @@ const CreateDog = () => {
     };
 
     function validateLifeSpanMax(value) {
-        if(value && (isNaN(value) || value % 1 !== 0)) {
+        if(value && value % 1 !== 0) {
             setError({...error, errorLifeSpanMax: 'Only intergers numbers'});
         } else if(value && value > 20) {
             setError({...error, errorLifeSpanMax: 'Max 20 years'});
-        } else if(value && values.lifeSpanMin >= value){
+        } else if(value && (values.lifeSpanMin !== '' && values.lifeSpanMin >= Number(value))) {
             setError({...error, errorLifeSpanMax: `Only numbers greater than ${values.lifeSpanMin}`});
         } else {
             setError({...error, errorLifeSpanMax: ''});
@@ -145,6 +144,7 @@ const CreateDog = () => {
         const weight = values.weightMin + ' - ' + values.weightMax;
         const lifeSpan = values.lifeSpanMin + ' - ' + values.lifeSpanMax;
         selectedTemperaments = selectedOptions.map(t => temperaments.indexOf(t.value) + 1);
+        if(selectedTemperaments.length === 0) return alert('Select at least one temperament');
         if(formError()) {
             return alert('Error in any of the fields.');
         };
@@ -175,9 +175,9 @@ const CreateDog = () => {
             {!error.errorHeightMin ? null : <span>{error.errorHeightMin}</span>}
             <input type="text" name="heightMax" value={values.heightMax} placeholder="Height Max" onChange={(e) => validateHeightMax(e.target.value)}/>
             {!error.errorHeightMax ? null : <span>{error.errorHeightMax}</span>}
-            <input type="text" name="lifeSpanMin" value={values.lifeSpanMin} placeholder="Life Span Min" onChange={(e) => validateLifeSpanMin(e.target.value)}/>
+            <input type="number" name="lifeSpanMin" value={values.lifeSpanMin} placeholder="Life Span Min" onChange={(e) => validateLifeSpanMin(e.target.value)}/>
             {!error.errorLifeSpanMin ? null : <span>{error.errorLifeSpanMin}</span>}
-            <input type="text" name="lifeSpanMax" value={values.lifeSpanMax} placeholder="Life Span Max" onChange={(e) => validateLifeSpanMax(e.target.value)}/> 
+            <input type="number" name="lifeSpanMax" value={values.lifeSpanMax} placeholder="Life Span Max" onChange={(e) => validateLifeSpanMax(e.target.value)}/> 
             {!error.errorLifeSpanMax ? null : <span>{error.errorLifeSpanMax}</span>}
             <input type="text" name="image" value={values.image} placeholder="Image Url" onChange={(e) => validateImage(e.target.value)}/>
             {!error.errorImage ? null : <span>{error.errorImage}</span>}

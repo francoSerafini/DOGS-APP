@@ -2,9 +2,13 @@ import React from 'react';
 
 const ToggleButtons = (props) => {
 
-    let dogs = props.dogs;
+    //let dogs = props.dogs;
+    
+    let dogs = props.states.filteredDogs.length !== 0 ? 
+    props.states.filteredDogs :
+    props.dogs;
 
-    const [toggle, setToggle] = React.useState({ name: 'A-Z', value: true });
+    const [toggle, setToggle] = React.useState(true);
 
     (function(){
         if(dogs[0] && dogs[0].id !== "notFound") {
@@ -17,24 +21,22 @@ const ToggleButtons = (props) => {
 
     function toggleDogs(prop) {
         
-        if(toggle.value) {
+        if(toggle) {
             dogs = dogs.sort(
                 function (a, b) {
                     if (a[prop] > b[prop]) return 1;
                     if (a[prop] < b[prop]) return -1;
                     return 0;
                 }, prop);
-            setToggle({name: 'A-Z', value: false });
-        }
-
-        else {
+            setToggle(false);
+        } else {
             dogs = dogs.sort(
                 function (a, b) {
                     if (a[prop] > b[prop]) return -1;
                     if (a[prop] < b[prop]) return 1;
                     return 0;
                 }, prop);
-            setToggle({ name: 'Z-A', value: true });
+            setToggle(true);
         };
         props.order === true ? props.setOrder(false) : props.setOrder(true);
         return dogs;
@@ -54,13 +56,12 @@ const ToggleButtons = (props) => {
         <div>
             <div>
                 <label className="toggleNames">
-                    <span>{toggle.name}</span>
+                    <span>{toggle ? 'A-Z' : 'Z-A'}</span>
                     <input 
                         type="checkbox"
                         id="az"
                         value ='az'
-                        onChange={ handleChange }
-                    />
+                        onChange={ handleChange }/>
                     <span className="slider round"></span>
                 </label>
             </div>
@@ -71,8 +72,7 @@ const ToggleButtons = (props) => {
                         type="checkbox"
                         id="kg"
                         value = 'kg'
-                        onChange={ handleChange }
-                    />
+                        onChange={ handleChange }/>
                     <span className="slider round"></span>
                 </label>
             </div>

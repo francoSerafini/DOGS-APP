@@ -27,8 +27,7 @@ const SearchBar = (props) => {
                 type="text"
                 id="race"
                 autoComplete="off"
-                onChange={ handleChange }
-            />
+                onChange={ handleChange }/>
         </div>
         <button type="submit" onClick={ handleSubmit }>SEARCH</button>
     </form>

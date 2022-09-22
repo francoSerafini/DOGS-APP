@@ -17,30 +17,23 @@ const TemperamentsSelect = (props) => {
             if(event.target.checked) {
                 prevTemp.push(event.target.value);
                 dogsTemp = filtered.filter(d => d.temperaments && d.temperaments.includes(event.target.value));
-
                 if(dogsTemp.length === 0) {
                     event.target.checked = false;
                     prevTemp.pop()
                     alert('no matchs for that filters');
-                }
-
-                else {
+                } else {
                     props.setStates({
                         ...props.states,
                         filteredDogs: dogsTemp
                     });
                 };
-            }
-
-            else {
+            } else {
                 dogsTemp = props.dogs;
                 prevTemp = prevTemp.filter(t => t !== event.target.value);
-
                 for (let i = 0; i < prevTemp.length; i++) { //eslint-disable-next-line
                     dogsTemp = dogsTemp.filter(d => d.temperaments &&
                         d.temperaments.includes(prevTemp[i]));
                 };
-
                 props.setStates({
                     ...props.states,
                     filteredDogs: dogsTemp
