@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDogs, getTemperaments } from "../../actions";
+import Navbar from "../Navbar/Navbar";
 
 const CreateDog = () => {
 
@@ -50,7 +51,6 @@ const CreateDog = () => {
     };
 
     function validateWeighMax(value) {
-        console.log(value, values.weightMin, 'min')
         if(value && (isNaN(value) || value % 1 !== 0)) {
             setError({...error, errorWeightMax: 'Only intergers numbers'});
         } else if(value && value > 90) {
@@ -128,7 +128,7 @@ const CreateDog = () => {
         setValues({...values, image: value});
     };
     
-    function handleChange (selectedOption){
+    function handleChange (selectedOption) {
         setSelectedOptions(selectedOption);
     };
 
@@ -140,6 +140,7 @@ const CreateDog = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(e)
         const height = values.heightMin + ' - ' + values.heightMax;
         const weight = values.weightMin + ' - ' + values.weightMax;
         const lifeSpan = values.lifeSpanMin + ' - ' + values.lifeSpanMax;
@@ -164,37 +165,43 @@ const CreateDog = () => {
     
 
     return(
-        <form onSubmit={ handleSubmit }>  
-            <input type="text" name="breedName" value={values.breedName} placeholder="Breed Name" onChange={(e) => validateBreed(e.target.value)}/>
-            {!error.errorBreed ? null : <span>{error.errorBreed}</span>}
-            <input type="text" name="weightMin" value={values.weightMin} placeholder="Weight Min" onChange={(e) => validateWeightMin(e.target.value)}/>
-            {!error.errorWeightMin ? null : <span>{error.errorWeightMin}</span>}
-            <input type="text" name="weightMax" value={values.weightMax} placeholder="Weight Max" onChange={(e) => validateWeighMax(e.target.value)}/>
-            {!error.errorWeightMax ? null : <span>{error.errorWeightMax}</span>}
-            <input type="text" name="heightMin" value={values.heightMin} placeholder="Height Min" onChange={(e) => validateHeightMin(e.target.value)}/>
-            {!error.errorHeightMin ? null : <span>{error.errorHeightMin}</span>}
-            <input type="text" name="heightMax" value={values.heightMax} placeholder="Height Max" onChange={(e) => validateHeightMax(e.target.value)}/>
-            {!error.errorHeightMax ? null : <span>{error.errorHeightMax}</span>}
-            <input type="number" name="lifeSpanMin" value={values.lifeSpanMin} placeholder="Life Span Min" onChange={(e) => validateLifeSpanMin(e.target.value)}/>
-            {!error.errorLifeSpanMin ? null : <span>{error.errorLifeSpanMin}</span>}
-            <input type="number" name="lifeSpanMax" value={values.lifeSpanMax} placeholder="Life Span Max" onChange={(e) => validateLifeSpanMax(e.target.value)}/> 
-            {!error.errorLifeSpanMax ? null : <span>{error.errorLifeSpanMax}</span>}
-            <input type="text" name="image" value={values.image} placeholder="Image Url" onChange={(e) => validateImage(e.target.value)}/>
-            {!error.errorImage ? null : <span>{error.errorImage}</span>}
-            <Select
-                className="basic-single"
-                classNamePrefix="select"
-                defaultValue={'Temperaments'}
-                isLoading={false}
-                isClearable={true}
-                isSearchable={true}
-                isOptionDisabled={() => selectedOptions.length >= 5}
-                name="color"
-                options={temp}
-                isMulti
-                onChange={handleChange}/>
-            <input type="submit" value="Submit"/>
-        </form>
+        <div>
+            <div>
+                <Navbar/>
+            </div>
+            <form onSubmit={ handleSubmit }>  
+                <input type="text" name="breedName" value={values.breedName} placeholder="Breed Name" onChange={(e) => validateBreed(e.target.value)}/>
+                {!error.errorBreed ? null : <span>{error.errorBreed}</span>}
+                <input type="text" name="weightMin" value={values.weightMin} placeholder="Weight Min" onChange={(e) => validateWeightMin(e.target.value)}/>
+                {!error.errorWeightMin ? null : <span>{error.errorWeightMin}</span>}
+                <input type="text" name="weightMax" value={values.weightMax} placeholder="Weight Max" onChange={(e) => validateWeighMax(e.target.value)}/>
+                {!error.errorWeightMax ? null : <span>{error.errorWeightMax}</span>}
+                <input type="text" name="heightMin" value={values.heightMin} placeholder="Height Min" onChange={(e) => validateHeightMin(e.target.value)}/>
+                {!error.errorHeightMin ? null : <span>{error.errorHeightMin}</span>}
+                <input type="text" name="heightMax" value={values.heightMax} placeholder="Height Max" onChange={(e) => validateHeightMax(e.target.value)}/>
+                {!error.errorHeightMax ? null : <span>{error.errorHeightMax}</span>}
+                <input type="number" name="lifeSpanMin" value={values.lifeSpanMin} placeholder="Life Span Min" onChange={(e) => validateLifeSpanMin(e.target.value)}/>
+                {!error.errorLifeSpanMin ? null : <span>{error.errorLifeSpanMin}</span>}
+                <input type="number" name="lifeSpanMax" value={values.lifeSpanMax} placeholder="Life Span Max" onChange={(e) => validateLifeSpanMax(e.target.value)}/> 
+                {!error.errorLifeSpanMax ? null : <span>{error.errorLifeSpanMax}</span>}
+                <input type="text" name="image" value={values.image} placeholder="Image Url" onChange={(e) => validateImage(e.target.value)}/>
+                {!error.errorImage ? null : <span>{error.errorImage}</span>}
+                <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    defaultValue={'Temperaments'}
+                    isLoading={false}
+                    isClearable={true}
+                    isSearchable={true}
+                    isOptionDisabled={() => selectedOptions.length >= 5}
+                    name=""
+                    options={temp}
+                    isMulti
+                    onChange={handleChange}/>
+                    {/* //onSubmit = {() => } */}
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
     )
 };
 

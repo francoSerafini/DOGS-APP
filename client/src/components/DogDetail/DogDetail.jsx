@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import  { getDogDetail } from '../../actions'
+import Navbar from "../Navbar/Navbar";
+
 const DogDetail = (props) => {
 
     const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const DogDetail = (props) => {
 
     return(
         <div key={dog.id}>
+            <Navbar/>
             <div>
                 <h3>{dog.name}</h3>
                 <h3>Height: {dog.height} Cm</h3>

@@ -6,6 +6,7 @@ import BaseSelect from '../BaseSelect/BaseSelect';
 import SearchBar from '../SearchBar/SearchBar';
 import ToggleButtons from '../ToggleButtons/ToggleButtons';
 import Paginated from '../Paginated/Paginated';
+import Navbar from '../Navbar/Navbar';
 
 const Dogs = () => {
 
@@ -25,12 +26,14 @@ const Dogs = () => {
         return(
             <div>
                 <div>
+                    <Navbar/>
+                </div>
+                <div>
                     <SearchBar
                         dispatch={dispatch}
                         states={state}
                         setStates={setState}
-                        getDogs={getDogs}
-                    />
+                        getDogs={getDogs}/>
                 </div>
                 <div>
                     <ToggleButtons
@@ -38,23 +41,20 @@ const Dogs = () => {
                         states={state}
                         setStates={setState}
                         order={order}
-                        setOrder={setOrder}
-                    />
+                        setOrder={setOrder}/>
                 </div>
                 <div>
                     <TemperamentsSelect 
                         dogs={dogs}
                         states={state}
-                        setStates={setState}
-                    />              
+                        setStates={setState}/>              
                 </div> 
                 <div>
                     <BaseSelect
                         dogs={dogs}
                         states={state}
                         setStates={setState} 
-                        dispatch={dispatch}
-                    />
+                        dispatch={dispatch}/>
                 </div>
                 <div>
                     <Paginated
