@@ -25,6 +25,7 @@
 
 button {
     border-radius: 30px;
+    border-color: #5a5d63;
     background-color: white;
     width: 100px;
 }
@@ -36,14 +37,10 @@ button:hover {
     transition: all 0.2s ease;
 }
 
-.list {
-    margin: 0;
-    padding-right: 70px;
-}
-
 .list-item {
     margin: 0;
     display: flex;
+    padding: 60px;
     height: 100%;
     width: auto;
     align-items: center;

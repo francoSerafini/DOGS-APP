@@ -1,0 +1,17 @@
+.findDog {
+    display: flex;
+    place-content: end;
+    margin-left: auto;
+    background-color: #5a5d63;
+    padding-right: 85px;
+    padding-top: 10px;
+    height: 45px;
+    width: 320px;
+    margin-top: 3px;
+    border-radius: 8px;
+}
+
+.breed {
+    border-radius: 30px;
+    height: 19px;
+}

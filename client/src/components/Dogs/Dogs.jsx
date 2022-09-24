@@ -7,6 +7,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import ToggleButtons from '../ToggleButtons/ToggleButtons';
 import Paginated from '../Paginated/Paginated';
 import Navbar from '../Navbar/Navbar';
+import './Dogs.css';
 
 const Dogs = () => {
 
@@ -24,43 +25,31 @@ const Dogs = () => {
     let dogsToShow = state.filteredDogs.length !== 0 ? state.filteredDogs : dogs;
 
         return(
-            <div>
-                <div>
-                    <Navbar/>
-                </div>
-                <div>
-                    <SearchBar
-                        dispatch={dispatch}
-                        states={state}
-                        setStates={setState}
-                        getDogs={getDogs}/>
-                </div>
-                <div>
-                    <ToggleButtons
-                        dogs={dogs}
-                        states={state}
-                        setStates={setState}
-                        order={order}
-                        setOrder={setOrder}/>
-                </div>
-                <div>
-                    <TemperamentsSelect 
-                        dogs={dogs}
-                        states={state}
-                        setStates={setState}/>              
-                </div> 
-                <div>
-                    <BaseSelect
-                        dogs={dogs}
-                        states={state}
-                        setStates={setState} 
-                        dispatch={dispatch}/>
-                </div>
-                <div>
-                    <Paginated
-                        dogsToShow={dogsToShow}
-                        order={order}/>
-                </div>
+            <div className='page'>
+                <Navbar/>
+                <SearchBar
+                    dispatch={dispatch}
+                    states={state}
+                    setStates={setState}
+                    getDogs={getDogs}/>
+                <ToggleButtons
+                    dogs={dogs}
+                    states={state}
+                    setStates={setState}
+                    order={order}
+                    setOrder={setOrder}/>
+                <TemperamentsSelect 
+                    dogs={dogs}
+                    states={state}
+                    setStates={setState}/>             
+                <BaseSelect
+                    dogs={dogs}
+                    states={state}
+                    setStates={setState} 
+                    dispatch={dispatch}/>
+                <Paginated
+                    dogsToShow={dogsToShow}
+                    order={order}/>
             </div>
         );
     };

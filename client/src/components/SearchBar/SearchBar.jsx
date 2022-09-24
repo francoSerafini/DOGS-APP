@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchBar.css'
 
 const SearchBar = (props) => {
 
@@ -21,15 +22,17 @@ const SearchBar = (props) => {
     };
         
     return(
-        <form className="race_input" onSubmit={(e) => e.preventDefault()}>
-        <div>
+        <form className="findDog" onSubmit={(e) => e.preventDefault()}>
             <input
                 type="text"
-                id="race"
+                className='breed'
+                placeholder='Search by breed...'
+                id="breed"
                 autoComplete="off"
                 onChange={ handleChange }/>
-        </div>
-        <button type="submit" onClick={ handleSubmit }>SEARCH</button>
+            <div className='search'>
+                <button type="submit" onClick={ handleSubmit }>SEARCH</button>
+            </div>
     </form>
     );
 };
