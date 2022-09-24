@@ -1,0 +1,56 @@
+.navbar {
+    height: 80px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #5a5d63;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.dog {
+    height: 90px;
+    padding-top: 10px;
+}
+
+.titleNav {
+    color: white;
+    font-size: xx-large;
+    padding-left: 200px;
+    white-space: pre;
+}
+
+button {
+    border-radius: 30px;
+    background-color: white;
+    width: 100px;
+}
+
+button:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: #5f6063;
+    box-shadow: 0 4px 16px rgb(151, 149, 149);
+    transition: all 0.2s ease;
+}
+
+.list {
+    margin: 0;
+    padding-right: 70px;
+}
+
+.list-item {
+    margin: 0;
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
+}
+
+.list-item a {
+    height: 100%;
+    padding: 16px 20px;
+}
+

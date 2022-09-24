@@ -2,7 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getDogs } from '../../actions';
-import Logo from '../../Logo.jpg'
+import Logo from '../../Logo-nav.png';
+import './Navbar.css';
 
 
 const Navbar = () => {
@@ -16,8 +17,9 @@ const Navbar = () => {
     return (
         <header className="navbar">
             <div>
-                <img id="logoDog" src={Logo} width="90" height="90" className="d-inline-block align-top" alt="" />
+                <img id="logoDog" src={Logo} className="dog" alt="" />
             </div>
+            <h1 className='titleNav'>PI DOGS</h1>
             <nav>
                 <ul className="list">                   
                     <li className="list-item">

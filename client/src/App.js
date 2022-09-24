@@ -8,7 +8,6 @@ import CreateDog from './components/CreateDog/CreateDog';
 function App() {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
       <Route exact path='/' component={LandingPage} />
       <Route exact path='/home' component={Dogs} />
       <Route exact path='/dogDetail/:id' component={DogDetail} />

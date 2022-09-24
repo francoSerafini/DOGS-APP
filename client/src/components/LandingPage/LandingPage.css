@@ -1,0 +1,77 @@
+.landingPage {
+    width: auto;
+    height: 100%;
+    background-image: url('../../Logo.jpg'); 
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: right top;
+    
+}
+
+.home {
+    position: absolute;
+    width: 90px;
+    height: 50px;
+    border-radius: 50px;
+    top: 40%;
+    left: 15%;
+    background-color: white;
+    color: black;
+    font-size: medium;
+    border: 2px solid, black;
+}
+
+.home:hover {
+    background-color: black;
+    color: white;
+}
+
+.title {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 450px;
+    font-size: large;
+}
+
+.pi {
+    width: 32px;
+    height: 31px;
+    padding-top: 35px;
+    padding-left: 8px; 
+    padding-right: 8px;
+}
+
+.powered {
+    text-align: end;
+    padding-right: 20px;
+    position: relative;
+    top: 83%;
+}
+
+@media only screen and (max-width:800px) {
+
+    .landingPage {
+        width: auto;
+        background-repeat: no-repeat;
+        background-position: 80%, 50%;
+        background-size: 120%;
+    }
+
+    .home {
+        top: 68%;
+        left: 40%;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+        padding-right: 15%;
+        font-size: large;
+    }
+     
+    .powered {
+        top: 93%;
+        padding-right: 110px;
+    }
+} 
