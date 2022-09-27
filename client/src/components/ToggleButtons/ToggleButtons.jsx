@@ -1,8 +1,7 @@
 import React from 'react';
+import './ToggleButtons.css'
 
 const ToggleButtons = (props) => {
-
-    //let dogs = props.dogs;
     
     let dogs = props.states.filteredDogs.length !== 0 ? 
     props.states.filteredDogs :
@@ -21,14 +20,14 @@ const ToggleButtons = (props) => {
 
     function toggleDogs(prop) {
         
-        if(toggle) {
+        if(!toggle) {
             dogs = dogs.sort(
                 function (a, b) {
                     if (a[prop] > b[prop]) return 1;
                     if (a[prop] < b[prop]) return -1;
                     return 0;
                 }, prop);
-            setToggle(false);
+            setToggle(true);
         } else {
             dogs = dogs.sort(
                 function (a, b) {
@@ -36,7 +35,7 @@ const ToggleButtons = (props) => {
                     if (a[prop] < b[prop]) return 1;
                     return 0;
                 }, prop);
-            setToggle(true);
+            setToggle(false);
         };
         props.order === true ? props.setOrder(false) : props.setOrder(true);
         return dogs;
@@ -53,30 +52,17 @@ const ToggleButtons = (props) => {
     };
 
     return(
-        <div>
-            <div>
-                <label className="toggleNames">
-                    <span>{toggle ? 'A-Z' : 'Z-A'}</span>
-                    <input 
-                        type="checkbox"
-                        id="az"
-                        value ='az'
-                        onChange={ handleChange }/>
-                    <span className="slider round"></span>
-                </label>
-            </div>
-            <div>
-            <label className="toggleWeight">
-                    <span>weight</span>
-                    <input 
-                        type="checkbox"
-                        id="kg"
-                        value = 'kg'
-                        onChange={ handleChange }/>
-                    <span className="slider round"></span>
-                </label>
-            </div>
+        <div className='toggles'>
+           <label className="switchBtn">
+                <input type="checkbox" value ='az' onChange={ handleChange }/>
+                <div className="slide">Sort A to Z</div>
+            </label>
+            <label className="switchBtn">
+                <input type="checkbox" value = 'kg' onChange={ handleChange }/>
+                <div className="slide">Sort by weight</div>
+            </label> 
         </div>
+           
     );
 };
 

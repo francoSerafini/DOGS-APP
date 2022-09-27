@@ -1,0 +1,12 @@
+.chooser {
+    margin-top: 5px;
+    margin-bottom: 0px;
+
+}
+
+.base {
+    margin-top: 5px;
+    border-radius: 8px;
+    border: solid;
+    border-width: 2px;
+}

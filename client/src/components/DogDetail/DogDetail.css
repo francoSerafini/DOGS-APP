@@ -1,0 +1,48 @@
+.dogDetail {
+    height: 100vh;
+    background-image: url('../../wallpaper.jpg');
+    background-size: 100vh;
+}
+
+.detail {
+    display: flex;
+    background-color: rgba(114, 107, 107, 0.877);
+    margin: 40px;
+    border-radius: 50px;
+}
+
+.info {
+    margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 1%;
+}
+
+.imageDetail {
+    width: 50%;
+    margin-right: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 8%;
+}
+
+.dogName {
+    margin-bottom: 50px;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width:800px) {
+    
+    .detail {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .imageDetail {
+        width: 90%;
+        margin-bottom: 2%;
+    }
+
+    .info {
+        margin-top: 0%;
+    }
+}

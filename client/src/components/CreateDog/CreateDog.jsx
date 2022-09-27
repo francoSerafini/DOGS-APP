@@ -18,7 +18,7 @@ const CreateDog = () => {
     });
 
     let selectedTemperaments = [];
-    const [selectedOptions, setSelectedOptions] = React.useState([]);
+    const [selectedOptions, setSelectedOptions] = useState([]);
     const [values, setValues] = useState({});
     const [error, setError] = useState({})
     

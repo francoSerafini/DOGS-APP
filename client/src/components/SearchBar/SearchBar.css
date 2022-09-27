@@ -1,7 +1,7 @@
 .findDog {
     display: flex;
     place-content: end;
-    margin-left: auto;
+    float: right;
     background-color: #5a5d63;
     padding-right: 85px;
     padding-top: 10px;
@@ -14,4 +14,19 @@
 .breed {
     border-radius: 30px;
     height: 19px;
+}
+
+@media only screen and (max-width:800px) {
+    .findDog {
+        height: 60px;
+        margin-right: 228px;
+        padding-right: 30px;
+        margin-top: 20px;
+    }
+
+    .breed {
+        border-radius: 30px;
+        margin-right: 10px;
+        height: 40px;
+    }
 }

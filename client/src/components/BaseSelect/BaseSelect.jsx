@@ -1,4 +1,5 @@
 import React from 'react';
+import './BaseSelect.css'
 
 const BaseSelect = (props) => {
 
@@ -32,14 +33,14 @@ const BaseSelect = (props) => {
     };
 
     return(
-        <select
-            name='base'
-            id='db'
-            onChange={ handleChange }>
-            <option value = 'AllDB'>All</option>    
-            <option value = 'DataBase'>Data Base</option>                   
-            <option value = 'Api'>External API</option>
-        </select>
+        <div>
+            <h3 className='chooser'>DB Chooser</h3>
+            <select className='base' onChange={ handleChange }>
+                <option value = 'AllDB'>All</option>    
+                <option value = 'DataBase'>Data Base</option>                   
+                <option value = 'Api'>External API</option>
+            </select>
+        </div>
     );
 };
 

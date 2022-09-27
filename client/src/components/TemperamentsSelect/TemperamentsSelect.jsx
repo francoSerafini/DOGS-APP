@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import './TemperamentsSelect.css';
 
 let prevTemp = [];
 let dogsTemp = [];
@@ -7,6 +8,7 @@ let dogsTemp = [];
 const TemperamentsSelect = (props) => {
 
     const temperaments = useSelector(state => state.temperaments);
+    const [checkbox, setCheckbox] = React.useState({expanded: false, className: 'hide'});
     
 
     function handleChange(event) {
@@ -40,17 +42,36 @@ const TemperamentsSelect = (props) => {
                 });
             };
         };
+
+    
+    function showCheckboxes() {
+        if (!checkbox.expanded) {
+            setCheckbox({expanded: true, className:'expanded'})
+        } else {
+            setCheckbox({expanded: false, className:'hide'})
+        };
+    };
         
     return(
-        <div>
-            { temperaments && temperaments.map((temp, index) => 
-                <div key = {index}>
-                    <input type = 'checkbox' value= {temp} onChange={ handleChange }/>
+        <form>
+            <div className="multiselect">
+                <div className="selectBox" onClick={ showCheckboxes }>
+                    <select>
+                        <option>Select the temperaments</option>
+                    </select>
+                    <div className="overSelect"></div>
+                </div>
+               <div className={ checkbox.className }> 
+                    { temperaments && temperaments.map((temp, index) => 
+                    <div key = {index} className='item'>
                         <label>{temp}</label>
-                </div>)}
-        </div>
-     
+                        <input type = 'checkbox' value= {temp} onChange={ handleChange }/>
+                    </div>)}
+                </div>
+            </div>
+        </form>
     );
 };
 
 export default TemperamentsSelect;
+

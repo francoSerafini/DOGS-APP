@@ -27,26 +27,30 @@ const Dogs = () => {
         return(
             <div className='page'>
                 <Navbar/>
-                <SearchBar
-                    dispatch={dispatch}
-                    states={state}
-                    setStates={setState}
-                    getDogs={getDogs}/>
-                <ToggleButtons
-                    dogs={dogs}
-                    states={state}
-                    setStates={setState}
-                    order={order}
-                    setOrder={setOrder}/>
-                <TemperamentsSelect 
-                    dogs={dogs}
-                    states={state}
-                    setStates={setState}/>             
-                <BaseSelect
-                    dogs={dogs}
-                    states={state}
-                    setStates={setState} 
-                    dispatch={dispatch}/>
+                <div className='filters'> 
+                    <SearchBar
+                        dispatch={dispatch}
+                        states={state}
+                        setStates={setState}
+                        getDogs={getDogs}/>
+                    <div className='buttons'>
+                        <BaseSelect
+                            dogs={dogs}
+                            states={state}
+                            setStates={setState} 
+                            dispatch={dispatch}/>  
+                        <ToggleButtons
+                            dogs={dogs}
+                            states={state}
+                            setStates={setState}
+                            order={order}
+                            setOrder={setOrder}/>
+                        <TemperamentsSelect 
+                            dogs={dogs}
+                            states={state}
+                            setStates={setState}/> 
+                    </div>
+                </div>            
                 <Paginated
                     dogsToShow={dogsToShow}
                     order={order}/>

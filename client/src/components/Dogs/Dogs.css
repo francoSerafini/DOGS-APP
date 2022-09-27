@@ -1,4 +1,25 @@
 .page {
     display: flex;
     flex-direction: column;
+    height: 3000px;
+    background-image: url('../../wallpaper.jpg'); 
+}
+
+.buttons {
+    float: left;
+    background-color: #5a5d63;
+    margin-top: 5px;
+    border-radius: 8px;
+}
+
+@media only screen and (max-width:800px) {
+   
+    .buttons {
+        margin-left: 35%;
+        margin-top: 30px;
+   }
+
+   .page {
+        height: 570%;
+   }
 }
