@@ -3,9 +3,9 @@ import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDogs, getTemperaments } from "../../actions";
 import Navbar from "../Navbar/Navbar";
-import './CreateDog.css'
 
-const CreateDog = () => {
+
+const Prueva = () => {
 
     const dispatch = useDispatch();
 
@@ -206,20 +206,10 @@ const CreateDog = () => {
                     {!error.errorImage ? null : <h5>{error.errorImage}</h5>}
                 </div>
                 <h4>Select the Temperaments</h4>
-                <Select
-                    className="selectTemperaments"
-                    placeholder='Temperaments'
-                    isLoading={false}
-                    isClearable={true}
-                    isSearchable={true}
-                    isOptionDisabled={() => selectedOptions.length >= 5}
-                    options={temp}
-                    isMulti
-                    onChange={handleChange}/>
                 <input className='temperaments' type="submit" value="Create"/>
             </form>
         </div>
     )
 };
 
-export default CreateDog;
+export default Prueva;

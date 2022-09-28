@@ -1,0 +1,88 @@
+ .createPage {
+    height: 940px;
+    background-image: url('../../create.jpg');
+    background-position-y: 70px;
+    background-size: 100vh;
+ }
+
+ .createForm {
+    width: 50%;
+    margin: auto;
+    background-color: rgba(114, 107, 107, 0.877);
+    padding: 20px;
+    border-radius: 50px;
+    color: white;
+ }
+
+ .titleCreate {
+    border-radius: 12px;
+    color: white;
+    background-color: rgba(114, 107, 107, 0.877);
+    width: 35%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+ }
+
+ h4 {
+    margin: 8px;
+ }
+
+ h5 {
+    margin: 5px;
+    color: red;
+ }
+
+ input {
+    border-radius: 30px;
+    margin-bottom: 10px;
+ }
+
+ .maxAndMin {
+    width: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+ }
+
+.temperaments {
+    margin-top: 20px;
+    border-radius: 30px;
+    border-color: #5a5d63;
+    background-color: white;
+    width: 100px;
+}
+
+.temperaments:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: #5f6063;
+    box-shadow: 0 4px 16px rgb(151, 149, 149);
+    transition: all 0.2s ease;
+}
+
+.selectTemperaments {
+    color: black;
+}
+
+@media only screen and (max-width:800px) {
+
+    .createPage {
+        height: auto;
+        width: 100vh;
+    }
+
+    .titleCreate {
+        width: 70%;
+        font-size: xxx-large;
+    }
+
+    .createForm {
+        width: 80%;
+        font-size: xx-large;
+    }
+
+    input {
+        width: 60%;
+        height: 50px;
+        font-size: medium;
+    }
+}

@@ -38,9 +38,8 @@ button:hover {
 }
 
 .list-item {
-    margin: 0;
+    margin-right: 40px;
     display: flex;
-    padding: 60px;
     height: 100%;
     width: auto;
     align-items: center;
@@ -52,10 +51,26 @@ button:hover {
 }
 
 @media only screen and (max-width:800px) {
+
+    .navbar {
+        width: 100vh;
+        padding: 0%;
+    }
+
+    .titleNav {
+        padding-left: 0%;
+    }
+
     button {
         width: 100px;
         height: 50px;
+        font-size: large;
     }
+
+    .list-item {
+        margin: 0%;
+    }
+
     .list-item a {
         height: 100%;
         padding: 0px 0px;

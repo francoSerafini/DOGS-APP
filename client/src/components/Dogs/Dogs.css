@@ -1,7 +1,7 @@
 .page {
     display: flex;
     flex-direction: column;
-    height: 3000px;
+    height: 2500px;
     background-image: url('../../wallpaper.jpg'); 
 }
 
@@ -16,10 +16,14 @@
    
     .buttons {
         margin-left: 35%;
-        margin-top: 30px;
+        margin-top: 5%;
+        width: 90%;
+        margin-left: 5%;
    }
 
    .page {
-        height: 570%;
+        height: auto;
+        width: 100vh;
+        background-size: 100vh;
    }
 }

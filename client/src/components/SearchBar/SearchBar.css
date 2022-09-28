@@ -18,15 +18,18 @@
 
 @media only screen and (max-width:800px) {
     .findDog {
-        height: 60px;
-        margin-right: 228px;
-        padding-right: 30px;
-        margin-top: 20px;
+        height: 15%;
+        margin-right: 5%;
+        padding-right: 6%;
+        padding-left: 6%;
+        margin-top: 3%;
+        width: 80%;
     }
 
     .breed {
         border-radius: 30px;
         margin-right: 10px;
         height: 40px;
+        width: 90%;
     }
 }

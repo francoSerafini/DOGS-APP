@@ -64,8 +64,8 @@ const TemperamentsSelect = (props) => {
                <div className={ checkbox.className }> 
                     { temperaments && temperaments.map((temp, index) => 
                     <div key = {index} className='item'>
-                        <label>{temp}</label>
-                        <input type = 'checkbox' value= {temp} onChange={ handleChange }/>
+                        <label for={temp}>{temp}</label>
+                        <input type = 'checkbox' id={temp} value={temp} onChange={ handleChange }/>
                     </div>)}
                 </div>
             </div>

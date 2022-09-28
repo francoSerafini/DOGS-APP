@@ -52,24 +52,28 @@
 
     .landingPage {
         width: auto;
-        background-repeat: no-repeat;
-        background-position: 80%, 50%;
+        background-position: center;
         background-size: 120%;
     }
 
     .home {
-        top: 85%;
-        left: 40%;
+        top: 75%;
+        left: 37%;
     }
 
     .title {
         display: flex;
         justify-content: center;
-        padding-top: 40px;
-        padding-right: 15%;
-        font-size: large;
+        padding-top: 4%;
+        padding-right: 1%;
+        font-size: unset;
     }
-     
+    
+    .pi {
+        padding-top: 31px;
+        padding-left: 7px;
+    }
+
     .powered {
         top: 79%;
         padding-right: 20px;

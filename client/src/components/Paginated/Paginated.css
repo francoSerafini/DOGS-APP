@@ -31,9 +31,10 @@
 
 @media only screen and (max-width:800px) {
     .paginated {
-        margin-top: 5%;
-        margin-left: 9%;
+        margin-top: 15%;
+        margin-left: 7%;
         position: relative;
+        width: 100%;
     }
     
     .link {
@@ -41,11 +42,10 @@
     }
 
     .navigation {
-        margin-left: 11%;
+        margin-left: 6%;
     }
 
     .cards {
-        margin-left: 7%;
-        width: 100%;
+        width: 90%;
     }
 }

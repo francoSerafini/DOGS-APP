@@ -10,3 +10,19 @@
     border: solid;
     border-width: 2px;
 }
+
+@media only screen and (max-width:800px) {
+    
+    .chooser {
+        font-size: xx-large;
+        margin-top: 2%;
+    }
+
+    .base {
+        font-size: x-large;
+        margin-top: 2%;
+        width: 60%;
+        height: 30px;
+    }
+     
+}
