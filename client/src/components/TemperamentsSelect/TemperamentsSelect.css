@@ -46,6 +46,10 @@
     background-color: #1e90ff;
   }
 
+  .label {
+    margin-right: 20%;
+  }
+
   @media only screen and (max-width:800px) {
     
     .multiselect {

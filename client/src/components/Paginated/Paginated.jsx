@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { DogsCard } from '../DogsCard/DogsCard';
 import './Paginated.css'
 
@@ -41,21 +41,12 @@ const Paginated = (props) => {
    
     function dogsMap() {
             return ( 
-                    items.length && items.map( dog =>
-                        dog.id !== 'notFound' ? 
-                            <Link to={`/dogDetail/${dog.id}`} className='link' key={dog.id}>
-                                <DogsCard
-                                    key={dog.id}
-                                    name={dog.name}
-                                    image={dog.image}
-                                    temperaments={dog.temperaments}
-                                    weight={dog.weight}/>
-                            </Link> :
-                            <DogsCard
-                                key={dog.id}
-                                name={dog.name}
-                                image={dog.image}
-                            />)
+                items.length && items.map( dog =>
+                    dog.id !== 'notFound' ? 
+                        <Link to={`/dogDetail/${dog.id}`} className='link' key={dog.id}>
+                            <DogsCard key={dog.id} name={dog.name} image={dog.image} temperaments={dog.temperaments} weight={dog.weight}/>
+                        </Link> :
+                        <DogsCard key={dog.id} name={dog.name} image={dog.image}/>)
             );
         };
          

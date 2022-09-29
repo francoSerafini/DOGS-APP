@@ -83,7 +83,6 @@ const apiAllDogs = async function(endPoint) {
             weight: dog.weight.metric,
             temperaments: dog.temperament,
             image : image(dog)
-            //image: dog.image ? dog.image.url : `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`
             }),
         );
     });
@@ -179,7 +178,6 @@ const getAllDogs = async (req, res) => {
             res.send(err.message);
         }
     }
-    
 };
 
 const postDog = async (req, res) => {
@@ -187,15 +185,15 @@ const postDog = async (req, res) => {
     req.body.id = cont + 'db';
     await createTemperaments();
     if(!(name || height || weight)) {
-        res.status(404);
-        return res.send('Falta enviar datos');
+        res.status(400);
+        return res.send('Missing to send mandatory data');
     }
     try {
         const newRace = await Race.create(req.body);
         await newRace.setTemperaments(req.body.temperament);
         res.sendStatus(201);
     } catch(err) {
-        res.status(404);
+        res.status(400);
         res.send(err.message);
     };
     cont++;

@@ -12,7 +12,17 @@
     border-radius: 8px;
 }
 
+.filters {
+    margin-top: 6%;
+}
+
 @media only screen and (max-width:800px) {
+
+    .page {
+        height: auto;
+        width: 100vh;
+        background-size: 100vh;
+   }
    
     .buttons {
         margin-left: 35%;
@@ -21,9 +31,7 @@
         margin-left: 5%;
    }
 
-   .page {
-        height: auto;
-        width: 100vh;
-        background-size: 100vh;
+   .filters {
+        margin-top: 0%;
    }
 }

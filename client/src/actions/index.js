@@ -51,7 +51,9 @@ export function createDogs(data) {
                 type: CREATE_DOG,
                 payload: data
             });
-        }));
+            return alert('Breed created successfull')
+        })
+        .catch(e => alert('ERROR 400. Not created: ' + e.response.data)));
     };
 };
 

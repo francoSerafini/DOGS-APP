@@ -8,6 +8,7 @@
  .createForm {
     width: 50%;
     margin: auto;
+    margin-top: 50px;
     background-color: rgba(114, 107, 107, 0.877);
     padding: 20px;
     border-radius: 50px;
@@ -59,8 +60,29 @@
     transition: all 0.2s ease;
 }
 
-.selectTemperaments {
-    color: black;
+.selectedOptions {
+    display: flex;
+    justify-content: center;
+}
+
+.option {
+    display: flex;
+}
+
+.delete {
+    width: 30%;
+    height: 0px;
+    color: white;
+    padding-bottom: 17px;
+    margin-top: 5px;
+    font-size: x-small;
+    cursor: pointer;
+    background-color: transparent;
+    border: transparent;
+}
+
+.select {
+    border-radius: 10px;
 }
 
 @media only screen and (max-width:800px) {
@@ -84,5 +106,9 @@
         width: 60%;
         height: 50px;
         font-size: medium;
+    }
+
+    .delete {
+        font-size: large;
     }
 }

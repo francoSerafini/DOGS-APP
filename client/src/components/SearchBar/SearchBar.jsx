@@ -3,22 +3,23 @@ import './SearchBar.css'
 
 const SearchBar = (props) => {
 
-    const [state, setState] = React.useState({ race: '' });
+    const [state, setState] = React.useState({ breed: '' });
     
 
     function handleChange(event) {
         setState({
             ...state,
-            race: event.target.value 
+            breed: event.target.value 
         });
     };
 
     function handleSubmit() {
-        props.dispatch(props.getDogs(state.race));
+        props.dispatch(props.getDogs(state.breed));
         props.setStates({
             ...props.states,
             filteredDogs: []
         });
+        setState({breed:''});
     };
         
     return(
@@ -28,7 +29,7 @@ const SearchBar = (props) => {
                 className='breed'
                 placeholder='Search by breed...'
                 id="breed"
-                autoComplete="off"
+                value={state.breed}
                 onChange={ handleChange }/>
             <div className='search'>
                 <button type="submit" onClick={ handleSubmit }>SEARCH</button>
