@@ -1,8 +1,9 @@
 .page {
     display: flex;
     flex-direction: column;
-    height: 2500px;
+    height: 2400px;
     background-image: url('../../wallpaper.jpg'); 
+    background-size: 100vh;
 }
 
 .buttons {
@@ -10,10 +11,6 @@
     background-color: #5a5d63;
     margin-top: 5px;
     border-radius: 8px;
-}
-
-.filters {
-    margin-top: 6%;
 }
 
 @media only screen and (max-width:800px) {
@@ -29,9 +26,5 @@
         margin-top: 5%;
         width: 90%;
         margin-left: 5%;
-   }
-
-   .filters {
-        margin-top: 0%;
    }
 }

@@ -4,6 +4,8 @@ export const GET_DOGS = 'GET_DOGS';
 export const GET_DOG_DETAIL = 'GET_DOG_DETAIL';
 export const CREATE_DOG = 'CREATE_DOG';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
+export const ADD_DOG_FAVORITE = 'ADD_DOG_FAVORITE';
+export const REMOVE_DOG_FAVORITE ='REMOVE_DOG_FAVORITE';
 
 export function getDogs(name) {
     return function(dispatch) {
@@ -15,9 +17,9 @@ export function getDogs(name) {
                     type: GET_DOGS,
                     payload: data
                 });
-            }));
-        }
-        else {
+            })
+            .catch(e => alert('500: The dogs could not be loaded')));
+        } else {
             return (axios('http://localhost:3001/dogs')
             .then(response => response.data)
             .then(data => {
@@ -25,7 +27,8 @@ export function getDogs(name) {
                     type: GET_DOGS,
                     payload: data
                 });
-            }));
+            })
+            .catch(e => alert('ERROR 500: The dogs could not be loaded')));
         };
     };
 };
@@ -39,7 +42,8 @@ export function getDogDetail(id) {
                 type: GET_DOG_DETAIL,
                 payload: data
             });
-        }));
+        })
+        .catch(e => alert('ERROR 404: Dog Not Found')));
     };
 };
 
@@ -53,7 +57,7 @@ export function createDogs(data) {
             });
             return alert('Breed created successfull')
         })
-        .catch(e => alert('ERROR 400. Not created: ' + e.response.data)));
+        .catch(e => alert('ERROR 400: Not created: ' + e.response.data)));
     };
 };
 
@@ -66,6 +70,21 @@ export function getTemperaments() {
                 type: GET_TEMPERAMENTS, 
                 payload: data
             });
-        });
+        })
+        .catch(e => alert('ERROR 500: Tempers could not be loaded'));
     };
 };
+
+export function addDogFavorite(payload) {
+    return { 
+        type: ADD_DOG_FAVORITE, 
+        payload 
+    };
+}
+
+export function removeDogFavorite(payload) {
+    return {
+        type: 'REMOVE_DOG_FAVORITE',
+        payload
+    };
+}

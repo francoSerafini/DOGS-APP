@@ -161,7 +161,7 @@ const getAllDogs = async (req, res) => {
             res.send(allRaces);
         }
         catch(err) {
-            res.status(400);
+            res.status(500);
             res.send(err.message);
         }
     }
@@ -174,7 +174,7 @@ const getAllDogs = async (req, res) => {
             res.send(allRaces);
         }
         catch(err) {
-            res.status(404);
+            res.status(500);
             res.send(err.message);
         }
     }

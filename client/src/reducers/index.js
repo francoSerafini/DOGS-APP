@@ -1,10 +1,18 @@
-import { CREATE_DOG, GET_DOGS, GET_DOG_DETAIL, GET_TEMPERAMENTS } from "../actions";
+import { 
+    CREATE_DOG, 
+    GET_DOGS, 
+    GET_DOG_DETAIL, 
+    GET_TEMPERAMENTS, 
+    ADD_DOG_FAVORITE, 
+    REMOVE_DOG_FAVORITE 
+} from "../actions";
 
 const initialState = {
     dogs: [],
     dogDetail: [],
     createDog: [],
     temperaments: [],
+    favoritesDogs: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -32,6 +40,18 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 temperaments: action.payload
+            };
+
+        case ADD_DOG_FAVORITE:
+            return {
+                ...state,
+                favoritesDogs: state.favoritesDogs.concat(action.payload)
+            };
+        
+        case REMOVE_DOG_FAVORITE:
+            return {
+                ...state,
+                favoritesDogs: state.favoritesDogs.filter((dog) => dog !== action.payload)
             };
 
         default: 
