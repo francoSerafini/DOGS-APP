@@ -9,6 +9,7 @@ const DogDetail = (props) => {
 
     const dispatch = useDispatch();
     let dog = useSelector(state => state.dogDetail);
+    let favoritesDogs = useSelector(state => state.favoritesDogs);
     let id = props.match.params.id;
     const [loading, setLoading] = React.useState(false);
     
@@ -20,10 +21,12 @@ const DogDetail = (props) => {
     };
 
     function addFavorite() {
+        if(favoritesDogs.find(fav => fav.id === id)) return alert('The dog is already in your favorites');
         dispatch(addDogFavorite({
             name: dog.name,
             id: id
         }));
+        return alert('Dog added to Favorites');
     };
     
     React.useEffect(() => { 
@@ -41,7 +44,7 @@ const DogDetail = (props) => {
                                 <h1 className="dogName">{dog.name}</h1>
                                 <h3>Height: {dog.height} Cm</h3>
                                 <h3>weight: {dog.weight} Kg</h3>
-                                <h3>Temperaments: {dog.temperament}</h3>
+                                <h3>Temperaments: {dog.temperament ? dog.temperament : dog.temperaments}</h3>
                                 <h3>Life Span: {dog.life_span} Years</h3>
                             </div>
                             <img src={dog.image} alt='Not Found' className="imageDetail"></img>

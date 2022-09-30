@@ -17,7 +17,9 @@ const Navbar = () => {
     return (
         <header className="navbar">
             <div>
-                <img id="logoDog" src={Logo} className="dog" alt="" />
+                <Link to={'/'}>
+                    <img id="logoDog" src={Logo} className="dog" alt="" />
+                </Link>
             </div>
             <h1 className='titleNav'>PI DOGS</h1>
             <nav>
@@ -25,6 +27,9 @@ const Navbar = () => {
                     <li className="list-item">
                         <Link to={'/home'}>
                             <button onClick={ handleClick }>Home</button>
+                        </Link>
+                        <Link to={'/favorites'}>
+                            <button>Favorites</button>
                         </Link>
                         <Link to={'/createDog'}>
                             <button>Create Dog</button>
