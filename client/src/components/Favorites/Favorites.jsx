@@ -15,8 +15,8 @@ const Favorites = () => {
             <Navbar/>
             <h2 className='titleFavorites'>Your favorites dogs</h2>
             <ul className='name'>
-            {favoritesDogs.length !== 0 ? favoritesDogs.map(dog => 
-                <li>
+            {favoritesDogs.length !== 0 ? favoritesDogs.map((dog, index) => 
+                <li key={index}>
                     <Link className='link' to={`/dogDetail/${dog.id}`}>
                         <span>{dog.name}</span>
                     </Link>

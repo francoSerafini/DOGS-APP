@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DogsCard } from '../DogsCard/DogsCard';
+import DogsCard from '../DogsCard/DogsCard.jsx';
 import './Paginated.css'
 
 const Paginated = (props) => {
 
     let [items, setItems] = useState([]);
-         
+             
     let [currentPage, setCurrentPage] = useState(0);
 
     function awaitDogs() {

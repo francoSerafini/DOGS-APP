@@ -16,7 +16,7 @@ function App() {
         <Route exact path='/dogDetail/:id' component={DogDetail} />
         <Route exact path='/createDog' component={CreateDog} />
         <Route exact path='/favorites' component={Favorites} />
-        <Route exact path='*' component={NotFound} />
+        <Route path='*' component={NotFound} />
       </Switch>
     </div>
   );

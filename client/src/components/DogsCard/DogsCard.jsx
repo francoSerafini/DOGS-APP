@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './DogsCard.css';
 
-export class DogsCard extends Component {
+const DogsCard = (props) => {
 
-    render() {
-        return (
-            <div id={this.props.id} onClick={this.props.onClick} className='card'>
-                <h2 id={this.props.id}>{this.props.name}</h2>
-                <img className='image' src={this.props.image} alt='Not Found' id={this.props.id}></img>
-                {this.props.temperaments &&
-                <div id={this.props.id}>
-                    <h3 id={this.props.id} >Temperaments: {this.props.temperaments}</h3>
-                    <h3 id={this.props.id}>Weight: {this.props.weight} Kg</h3>
-                </div>
-                }
+    return (
+        <div id={props.id} className='card'>
+            <h2 id={props.id}>{props.name}</h2>
+            <img className='image' src={props.image} alt='Not Found' id={props.id}></img>
+            {props.temperaments &&
+            <div id={props.id}>
+                <h3 id={props.id} >Temperaments: {props.temperaments}</h3>
+                <h3 id={props.id}>Weight: {props.weight}Kg</h3>
             </div>
-        );
-    };
+            }
+        </div>
+    );
 };
+
+export default DogsCard;  
+
+  
+        
+ 

@@ -17,7 +17,7 @@ const DogDetail = (props) => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 3000);
     };
 
     function addFavorite() {
@@ -44,7 +44,7 @@ const DogDetail = (props) => {
                                 <h1 className="dogName">{dog.name}</h1>
                                 <h3>Height: {dog.height} Cm</h3>
                                 <h3>weight: {dog.weight} Kg</h3>
-                                <h3>Temperaments: {dog.temperament ? dog.temperament : dog.temperaments}</h3>
+                                <h3>Temperaments: {dog.temperaments}</h3>
                                 <h3>Life Span: {dog.life_span} Years</h3>
                             </div>
                             <img src={dog.image} alt='Not Found' className="imageDetail"></img>

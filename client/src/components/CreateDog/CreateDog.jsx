@@ -162,11 +162,11 @@ const CreateDog = () => {
             (values.lifeSpanMin && !values.lifeSpanMax)) return alert('Missing data on life expectancy');
         const newBreed = {
             name: values.breedName,
-            height: height,
-            weight: weight,
-            life_span: values.lifeSpanMin ? lifeSpan : undefined,
-            image: values.image ? values.image : undefined,
-            temperament: selectedTemperaments
+        height: height,
+        weight: weight,
+        life_span: values.lifeSpanMin ? lifeSpan : undefined,
+        image: values.image ? values.image : undefined,
+        temperament: selectedTemperaments
         };
         setValues({breedName:'', weightMin:'', weightMax:'', heightMin:'', heightMax:'',
             lifeSpanMin:'', lifeSpanMax:'', image:''});    

@@ -28,7 +28,7 @@ const apiFindDogById = async function(id) {
                     height: dog.height.metric,
                     weight: dog.weight.metric,
                     life_span: dog.life_span,
-                    temperament: dog.temperament,
+                    temperaments: dog.temperament,
                     image: dog.image ? dog.image.url : 'Not Found'
                 };
             };
@@ -79,7 +79,6 @@ const apiAllDogs = async function(endPoint) {
         data.map(dog => dogs.push({
             id: dog.id,
             name: dog.name,
-            height: dog.height.metric,
             weight: dog.weight.metric,
             temperaments: dog.temperament,
             image : image(dog)
@@ -139,7 +138,7 @@ const getDogById = async (req, res) => {
     }     
     catch(err) {
         res.send(err.message);
-    };
+    }; 
 };
 
 const getAllDogs = async (req, res) => {
