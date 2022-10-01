@@ -1,6 +1,7 @@
 .dogDetail {
     background-image: url('../../wallpaper.jpg');
     background-size: 100vh;
+    height: 110vh;
 }
 
 .detail {

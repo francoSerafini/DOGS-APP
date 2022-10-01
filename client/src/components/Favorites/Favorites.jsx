@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeDogFavorite } from '../../actions';
+import Navbar from '../Navbar/Navbar';
+import './Favorites.css';
 
 const Favorites = () => {
 
@@ -9,19 +11,21 @@ const Favorites = () => {
     let favoritesDogs = useSelector(state => state.favoritesDogs);
 
     return(
-        <div>
-            <h2>Your favorites dogs</h2>
-            <ul>
-            {favoritesDogs.map(dog => 
+        <div className='favorites'> 
+            <Navbar/>
+            <h2 className='titleFavorites'>Your favorites dogs</h2>
+            <ul className='name'>
+            {favoritesDogs.length !== 0 ? favoritesDogs.map(dog => 
                 <li>
-                    <Link to={`/dogDetail/${dog.id}`}>
+                    <Link className='link' to={`/dogDetail/${dog.id}`}>
                         <span>{dog.name}</span>
                     </Link>
-                    <button onClick={() =>
+                    <button className='remove' onClick={() =>
                         dispatch(removeDogFavorite(dog))}>
                         X
                     </button>
-                </li>)}
+                </li>) : 
+                <span>Go to the detail of your favorite dog to add it</span>}
             </ul>
         </div>
     );
