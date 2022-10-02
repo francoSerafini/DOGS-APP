@@ -33,10 +33,10 @@
     text-decoration: underline;
 }
 
-.heart {
+.fav {
     width: auto;
-    color: white;
-    border-color: transparent;
+    border: none;
+    color:red;
     background-color: transparent;
     font-size: x-large;
     height: 40px;
@@ -44,10 +44,15 @@
     margin-top: 5px;
 }
 
-.heart:hover {
-   background-color: transparent;
-   color:red; 
-   box-shadow: none;
+.notFav {
+    width: auto;
+    border: none;
+    color:white;
+    background-color: transparent;
+    font-size: x-large;
+    height: 40px;
+    margin-right: 18px;
+    margin-top: 5px;
 }
 
 @media only screen and (max-width:800px) {

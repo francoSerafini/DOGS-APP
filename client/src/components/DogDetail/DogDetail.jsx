@@ -12,6 +12,7 @@ const DogDetail = (props) => {
     let favoritesDogs = useSelector(state => state.favoritesDogs);
     let id = props.match.params.id;
     const [loading, setLoading] = React.useState(false);
+    const [heart, setHeart] = React.useState('')
     
     function changeLoading() {
         setLoading(true);
@@ -26,12 +27,16 @@ const DogDetail = (props) => {
             name: dog.name,
             id: id
         }));
+        setHeart('fav')
         return alert('Dog added to Favorites');
     };
+
+    
     
     React.useEffect(() => { 
     dispatch(getDogDetail(id))
     .catch(err => err.message)
+    favoritesDogs.some(dog => dog.id === id) ? setHeart('fav') : setHeart('notFav');
     changeLoading()}, [ dispatch ]); // eslint-disable-line
 
     return(
@@ -48,7 +53,7 @@ const DogDetail = (props) => {
                                 <h3>Life Span: {dog.life_span} Years</h3>
                             </div>
                             <img src={dog.image} alt='Not Found' className="imageDetail"></img>
-                            <button className="heart" type='checkbox' onClick={ addFavorite }>♡</button>
+                            <button className={heart} onClick={ addFavorite }>❤</button>
                         </div>}
         </div>   
     );
