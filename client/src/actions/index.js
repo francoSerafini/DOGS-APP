@@ -10,7 +10,7 @@ export const REMOVE_DOG_FAVORITE ='REMOVE_DOG_FAVORITE';
 export function getDogs(name) {
     return function(dispatch) {
         if(name) {
-            return (axios(`http://localhost:3001/dogs?name=${name}`)
+            return (axios(`/dogs?name=${name}`)
             .then(response => response.data)
             .then(data => {
                 dispatch({
@@ -20,7 +20,7 @@ export function getDogs(name) {
             })
             .catch(e => alert('500: The dogs could not be loaded')));
         } else {
-            return (axios('http://localhost:3001/dogs')
+            return (axios('/dogs')
             .then(response => response.data)
             .then(data => {
                 dispatch({
@@ -35,7 +35,7 @@ export function getDogs(name) {
     
 export function getDogDetail(id) {
     return function(dispatch) {
-        return (axios(`http://localhost:3001/dogs/${id}`)
+        return (axios(`/dogs/${id}`)
         .then(response => response.data)
         .then(data => {
             dispatch({
@@ -49,7 +49,7 @@ export function getDogDetail(id) {
 
 export function createDogs(data) {
     return function(dispatch) {
-        return (axios.post('http://localhost:3001/dogs', data)
+        return (axios.post('/dogs', data)
         .then(data => {
             dispatch({
                 type: CREATE_DOG,
@@ -63,7 +63,7 @@ export function createDogs(data) {
 
 export function getTemperaments() {
     return function(dispatch) {
-        return (axios('http://localhost:3001/temperaments'))
+        return (axios('/temperaments'))
         .then(response => response.data)
         .then(data => {
             dispatch({
