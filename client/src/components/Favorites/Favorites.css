@@ -52,3 +52,17 @@ ul {
     background-color: transparent;
     box-shadow: none;
  }
+
+ @media only screen and (max-width:800px) {
+    .favorites {
+        height: 170%;
+        width: fit-content;
+    }
+
+    .name {
+        width: auto;
+        margin-left: 0%;
+        font-size: x-large;
+    }
+    
+ }

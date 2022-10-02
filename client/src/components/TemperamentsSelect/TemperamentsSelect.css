@@ -66,4 +66,15 @@
       font-size: x-large;
       margin-bottom: 4%;
     }
+
+    .item {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+   .item input{
+      width: 40px;
+      height: 25px;
+
+    }
   }
