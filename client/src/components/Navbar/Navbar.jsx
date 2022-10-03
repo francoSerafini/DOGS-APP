@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getDogs } from '../../actions';
+import { getDogs, addDogsFiltered } from '../../actions';
 import Logo from '../../Logo-nav.png';
 import './Navbar.css';
 
@@ -12,6 +12,7 @@ const Navbar = () => {
 
     function handleClick(){
         dispatch(getDogs());
+        dispatch(addDogsFiltered([]));
     };
 
     return (
