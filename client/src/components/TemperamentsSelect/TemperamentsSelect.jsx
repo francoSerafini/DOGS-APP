@@ -1,20 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDogsFiltered } from '../../actions';
 import './TemperamentsSelect.css';
 
 let prevTemp = [];
 let dogsTemp = [];
 
-const TemperamentsSelect = (props) => {
+const TemperamentsSelect = () => {
 
     const temperaments = useSelector(state => state.temperaments);
+    let dogs = useSelector(state => state.dogs);
+    let filteredDogs = useSelector(state => state.filteredDogs);
     const [checkbox, setCheckbox] = React.useState({expanded: false, className: 'hide'});
+    const dispatch = useDispatch();
     
 
     function handleChange(event) {
 
-        let filtered = props.states.filteredDogs.length !== 0 ?
-            props.states.filteredDogs : props.dogs;
+        let filtered = filteredDogs.length !== 0 ? filteredDogs : dogs;
     
             if(event.target.checked) {
                 prevTemp.push(event.target.value);
@@ -24,22 +27,16 @@ const TemperamentsSelect = (props) => {
                     prevTemp.pop()
                     alert('no matchs for that filters');
                 } else {
-                    props.setStates({
-                        ...props.states,
-                        filteredDogs: dogsTemp
-                    });
+                    dispatch(addDogsFiltered(dogsTemp));
                 };
             } else {
-                dogsTemp = props.dogs;
+                dogsTemp = dogs;
                 prevTemp = prevTemp.filter(t => t !== event.target.value);
                 for (let i = 0; i < prevTemp.length; i++) { //eslint-disable-next-line
                     dogsTemp = dogsTemp.filter(d => d.temperaments &&
                         d.temperaments.includes(prevTemp[i]));
                 };
-                props.setStates({
-                    ...props.states,
-                    filteredDogs: dogsTemp
-                });
+                dispatch(addDogsFiltered(dogsTemp));
             };
         };
 

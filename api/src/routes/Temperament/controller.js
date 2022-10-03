@@ -4,7 +4,7 @@ const { API_KEY } = process.env;
 const { Temperament } = require('../../db');
 
 const createTemperaments = async function() {
-    const allTemperaments =  await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+    const allTemperaments = await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
     .then(response => response.data)
     .then(data => {
         let temperaments = new Set();
@@ -20,7 +20,7 @@ const createTemperaments = async function() {
 };
 
 
-const getAllTemperaments =  async (req, res) => {
+const getAllTemperaments =  async (req, res) => {   
     try {
         const temperaments = await createTemperaments();
         res.status(200);

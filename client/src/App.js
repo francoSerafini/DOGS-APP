@@ -19,7 +19,7 @@ function App() {
         <Route path='*' component={NotFound} />
       </Switch>
     </div>
-  );
+  );        
 };
 
 export default App;

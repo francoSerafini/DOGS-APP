@@ -12,11 +12,11 @@ import './Dogs.css';
 
 const Dogs = () => {
 
-    const [state, setState] = React.useState({ filteredDogs: [] });
     const [order, setOrder] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const dispatch = useDispatch();
     let dogs = useSelector(state => state.dogs);
+    let filteredDogs = useSelector(state => state.filteredDogs);
 
     function changeLoading() {
         setLoading(true);
@@ -27,12 +27,10 @@ const Dogs = () => {
     
     React.useEffect(() => { 
         dispatch(getDogs())
-        .catch(err => err.message)
         dispatch(getTemperaments())
-        .catch(err => err.message)
         changeLoading()}, [ dispatch ]);
 
-    let dogsToShow = state.filteredDogs.length !== 0 ? state.filteredDogs : dogs;
+    let dogsToShow = filteredDogs.length !== 0 ? filteredDogs : dogs;
 
         return(
             <div className='page'>
@@ -41,32 +39,14 @@ const Dogs = () => {
                     <Loading/> :
                         <div>
                             <div className='filters'> 
-                                <SearchBar
-                                    dispatch={dispatch}
-                                    states={state}
-                                    setStates={setState}
-                                    getDogs={getDogs}/>
-                                <div className='buttons'>
-                                    <BaseSelect
-                                        dogs={dogs}
-                                        states={state}
-                                        setStates={setState} 
-                                        dispatch={dispatch}/>  
-                                    <ToggleButtons
-                                        dogs={dogs}
-                                        states={state}
-                                        setStates={setState}
-                                        order={order}
-                                        setOrder={setOrder}/>
-                                    <TemperamentsSelect 
-                                        dogs={dogs}
-                                        states={state}
-                                        setStates={setState}/> 
+                                <SearchBar/>
+                                <div className='buttons'> 
+                                    <BaseSelect/>  
+                                    <ToggleButtons order={order} setOrder={setOrder}/>
+                                    <TemperamentsSelect/> 
                                 </div>
                             </div>            
-                            <Paginated
-                                dogsToShow={dogsToShow}
-                                order={order}/>
+                            <Paginated dogsToShow={dogsToShow} order={order}/>
                         </div>}
             </div>
         );

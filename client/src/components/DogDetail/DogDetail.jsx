@@ -35,14 +35,13 @@ const DogDetail = (props) => {
     
     React.useEffect(() => { 
     dispatch(getDogDetail(id))
-    .catch(err => err.message)
     favoritesDogs.some(dog => dog.id === id) ? setHeart('fav') : setHeart('notFav');
     changeLoading()}, [ dispatch ]); // eslint-disable-line
 
     return(
         <div key={dog.id} className='dogDetail'>
             <Navbar/>
-            {loading ? 
+            {loading || !dog.name ? 
                     <Loading/> :
                         <div className="detail">
                             <div className="info">

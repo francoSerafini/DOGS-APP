@@ -2,7 +2,7 @@ const express = require('express');
 
 const dogsController = require('./controller');
 
-const router = express.Router();
+const router = express.Router();   
 
 router.get('/:idRace', dogsController.getDogById);
 
@@ -13,7 +13,7 @@ router.get('/', dogsController.getAllDogs);
 router.post('/', dogsController.postDog);
 
 router.delete('/', dogsController.deleteDog);    
-
+ 
 module.exports = router;
 
 

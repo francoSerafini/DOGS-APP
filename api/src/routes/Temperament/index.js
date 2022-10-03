@@ -6,4 +6,4 @@ const router = express.Router();
 
 router.get('/', temperamentsController.getAllTemperaments);
 
-module.exports = router;
+module.exports = router;   

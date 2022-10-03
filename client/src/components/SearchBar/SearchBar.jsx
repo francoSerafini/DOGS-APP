@@ -1,9 +1,12 @@
 import React from 'react';
+import { getDogs, addDogsFiltered } from '../../actions';
+import { useDispatch } from 'react-redux';
 import './SearchBar.css'
 
-const SearchBar = (props) => {
+const SearchBar = () => {
 
     const [state, setState] = React.useState({ breed: '' });
+    const dispatch = useDispatch();
     
 
     function handleChange(event) {
@@ -14,11 +17,8 @@ const SearchBar = (props) => {
     };
 
     function handleSubmit() {
-        props.dispatch(props.getDogs(state.breed));
-        props.setStates({
-            ...props.states,
-            filteredDogs: []
-        });
+        dispatch(getDogs(state.breed));
+        dispatch(addDogsFiltered([]));
         setState({breed:''});
     };
         

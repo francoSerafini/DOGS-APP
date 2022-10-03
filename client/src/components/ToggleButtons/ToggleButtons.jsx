@@ -1,11 +1,15 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDogsFiltered } from '../../actions';
 import './ToggleButtons.css'
 
 const ToggleButtons = (props) => {
+
+    let dog = useSelector(state => state.dogs);
+    let filteredDogs = useSelector(state => state.filteredDogs);
+    const dispatch = useDispatch();
     
-    let dogs = props.states.filteredDogs.length !== 0 ? 
-    props.states.filteredDogs :
-    props.dogs;
+    let dogs = filteredDogs.length !== 0 ? filteredDogs : dog;
 
     const [toggle, setToggle] = React.useState(true);
 
@@ -45,10 +49,7 @@ const ToggleButtons = (props) => {
         let dogsData = [];
         if(event.target.value === 'az') dogsData = toggleDogs('name');
         else dogsData = toggleDogs('sum');
-        props.setStates({
-            ...props.states,
-            filteredDogs: dogsData
-        });
+        dispatch(addDogsFiltered(dogsData));
     };
 
     return(

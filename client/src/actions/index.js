@@ -4,6 +4,7 @@ export const GET_DOGS = 'GET_DOGS';
 export const GET_DOG_DETAIL = 'GET_DOG_DETAIL';
 export const CREATE_DOG = 'CREATE_DOG';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
+export const ADD_DOGS_FILTERED = 'ADD_DOGS_FILTERED'
 export const ADD_DOG_FAVORITE = 'ADD_DOG_FAVORITE';
 export const REMOVE_DOG_FAVORITE ='REMOVE_DOG_FAVORITE';
 
@@ -70,8 +71,15 @@ export function getTemperaments() {
                 type: GET_TEMPERAMENTS, 
                 payload: data
             });
-        })
+        })    
         .catch(e => alert('ERROR 500: Tempers could not be loaded'));
+    };
+};
+
+export function addDogsFiltered(payload) {
+    return {
+        type: ADD_DOGS_FILTERED,
+        payload
     };
 };
 

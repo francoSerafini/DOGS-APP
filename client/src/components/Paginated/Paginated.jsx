@@ -37,7 +37,7 @@ const Paginated = (props) => {
         setCurrentPage(prevPage);
     };
 
-    React.useEffect(() => { prevHandler(), awaitDogs() }, [ props.dogsToShow, props.order ]); // eslint-disable-line
+    React.useEffect(() => { awaitDogs() }, [ props.dogsToShow, props.order ]); // eslint-disable-line
    
     function dogsMap() {
             return ( 

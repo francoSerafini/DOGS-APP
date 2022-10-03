@@ -3,6 +3,7 @@ import {
     GET_DOGS, 
     GET_DOG_DETAIL, 
     GET_TEMPERAMENTS, 
+    ADD_DOGS_FILTERED,
     ADD_DOG_FAVORITE, 
     REMOVE_DOG_FAVORITE 
 } from "../actions";
@@ -11,6 +12,7 @@ const initialState = {
     dogs: [],
     dogDetail: [],
     createDog: [],
+    filteredDogs: [],
     temperaments: [],
     favoritesDogs: []
 };
@@ -41,6 +43,12 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 temperaments: action.payload
             };
+
+        case ADD_DOGS_FILTERED:
+            return {
+                ...state,
+                filteredDogs: action.payload
+            }; 
 
         case ADD_DOG_FAVORITE:
             return {

@@ -11,8 +11,8 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
     function handleClick(){
-        dispatch(getDogs())
-    }
+        dispatch(getDogs());
+    };
 
     return (
         <header className="navbar">

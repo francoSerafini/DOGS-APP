@@ -4,7 +4,7 @@ const axios = require('axios');
 const { Race, Temperament, Op } = require('../../db');
 const { createTemperaments } = require('../Temperament/controller');
 
-let cont = 0;
+let cont = 0;   
 
 const image = function(dog) {
     if (dog.image)
@@ -217,10 +217,9 @@ const updateDog = async (req, res) => {
     const { value, attribute } = req.body;
     if(!dog) {
         res.status(400);
-        res.send('No dog found whith the is provided');
+        res.send('No dog found whith the id provided');
     }else if(attribute !== 'name' && attribute !== 'height' && attribute !== 'weight' &&  
         attribute !== 'temperaments' && attribute !== 'image' && attribute !== 'life_span') {
-            console.log(attribute !== 'name')
             res.status(400);
             res.send('Invalid atribute');    
    }else{

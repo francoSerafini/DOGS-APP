@@ -1,35 +1,36 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDogsFiltered } from '../../actions';
 import './BaseSelect.css'
 
-const BaseSelect = (props) => {
+const BaseSelect = () => {
+
+    let dogs = useSelector(state => state.dogs);
+    let filteredDogs = useSelector(state => state.filteredDogs);
+    const dispatch = useDispatch();
 
     function handleChange(event) {
 
-        let filtered = props.states.filteredDogs.length !== 0 ?
-            props.states.filteredDogs : props.dogs;
+        let filtered = filteredDogs.length !== 0 ? filteredDogs : dogs;
 
         let dogsData = [];
 
         if(event.target.value === 'DataBase' ) {
             dogsData = filtered.filter(d => isNaN(d.id));
             if (dogsData.length === 0) { // si no coincidencias devuelvve todos
-                dogsData = props.dogs;
-                console.log('dogsData')
+                dogsData = dogs;
                 alert('no matchs for that filters');
             };
         } else if(event.target.value === 'Api') {     
             dogsData = filtered.filter(d => !isNaN(d.id)) 
             if (dogsData.length === 0) { // si no coincidencias devuelvve todos
-                dogsData = props.dogs;
+                dogsData = dogs;
                 alert('no matchs for that filters');
             };
         } else {
-            dogsData = props.dogs;
+            dogsData = dogs;
         };
-        props.setStates({
-            ...props.states,
-            filteredDogs: dogsData
-        });
+        dispatch(addDogsFiltered(dogsData));
     };
 
     return(
