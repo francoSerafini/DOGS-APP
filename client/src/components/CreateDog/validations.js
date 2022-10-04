@@ -104,7 +104,7 @@ const validateImage = function(value, error, setError, values, setValues) {
     setValues({...values, image: value});
 };
 
-module.exports = { 
+export { 
    validateBreed,
    validateHeightMin,
    validateHeightMax,

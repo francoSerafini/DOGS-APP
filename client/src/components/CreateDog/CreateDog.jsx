@@ -3,8 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTemperaments } from "../../actions";
 import Navbar from "../Navbar/Navbar";
 import './CreateDog.css'
+import {
+    validateBreed, 
+    validateHeightMin, 
+    validateHeightMax, 
+    validateWeightMin, 
+    validateWeighMax, 
+    validateLifeSpanMin,
+    validateLifeSpanMax,
+    validateImage
+    } from './validations';
+
 const axios = require('axios');
-const validations = require('./validations');
+
 
 const CreateDog = () => {
 
@@ -84,36 +95,36 @@ const CreateDog = () => {
             <form className='createForm' onSubmit={ handleSubmit }>  
                 <div>
                     <h4>Name*</h4>
-                    <input type="text" name="breedName" value={values.breedName || ''} placeholder=" Breed Name" onChange={(e) => validations.validateBreed(e.target.value, error, setError, values, setValues)}/>
+                    <input type="text" name="breedName" value={values.breedName || ''} placeholder=" Breed Name" onChange={(e) => validateBreed(e.target.value, error, setError, values, setValues)}/>
                     {!error.errorBreed ? null : <h5>{error.errorBreed}</h5>}
                 </div>
                 <div>
                     <h4>Weight*</h4>
-                    <input type="text" className="maxAndMin" value={values.weightMin || ''} placeholder=" Min" onChange={(e) => validations.validateWeightMin(e.target.value, error, setError, values, setValues)}/>
+                    <input type="text" className="maxAndMin" value={values.weightMin || ''} placeholder=" Min" onChange={(e) => validateWeightMin(e.target.value, error, setError, values, setValues)}/>
                     -
-                    <input type="text" className="maxAndMin" value={values.weightMax || ''} placeholder=" Max" onChange={(e) => validations.validateWeighMax(e.target.value, error, setError, values, setValues)}/>
+                    <input type="text" className="maxAndMin" value={values.weightMax || ''} placeholder=" Max" onChange={(e) => validateWeighMax(e.target.value, error, setError, values, setValues)}/>
                     {!error.errorWeightMin ? null : <h5>{error.errorWeightMin}</h5>}
                     {!error.errorWeightMax ? null : <h5>{error.errorWeightMax}</h5>}
                 </div>
                 <div>
                     <h4>Height*</h4>
-                    <input type="text" className="maxAndMin" value={values.heightMin || ''} placeholder=" Min" onChange={(e) => validations.validateHeightMin(e.target.value, error, setError, values, setValues)}/>
+                    <input type="text" className="maxAndMin" value={values.heightMin || ''} placeholder=" Min" onChange={(e) => validateHeightMin(e.target.value, error, setError, values, setValues)}/>
                     -
-                    <input type="text" className="maxAndMin" value={values.heightMax || ''} placeholder=" Max" onChange={(e) => validations.validateHeightMax(e.target.value, error, setError, values, setValues)}/>
+                    <input type="text" className="maxAndMin" value={values.heightMax || ''} placeholder=" Max" onChange={(e) => validateHeightMax(e.target.value, error, setError, values, setValues)}/>
                     {!error.errorHeightMin ? null : <h5>{error.errorHeightMin}</h5>}
                     {!error.errorHeightMax ? null : <h5>{error.errorHeightMax}</h5>}
                 </div>
                 <div>
                     <h4>Life Expectancy</h4>
-                    <input type="number" className="maxAndMin" value={values.lifeSpanMin || ''} placeholder="Min" onChange={(e) => validations.validateLifeSpanMin(e.target.value, error, setError, values, setValues)}/>
+                    <input type="number" className="maxAndMin" value={values.lifeSpanMin || ''} placeholder="Min" onChange={(e) => validateLifeSpanMin(e.target.value, error, setError, values, setValues)}/>
                     -
-                    <input type="number" className="maxAndMin" value={values.lifeSpanMax || ''} placeholder="Max" onChange={(e) => validations.validateLifeSpanMax(e.target.value, error, setError, values, setValues)}/> 
+                    <input type="number" className="maxAndMin" value={values.lifeSpanMax || ''} placeholder="Max" onChange={(e) => validateLifeSpanMax(e.target.value, error, setError, values, setValues)}/> 
                     {!error.errorLifeSpanMin ? null : <h5>{error.errorLifeSpanMin}</h5>}
                     {!error.errorLifeSpanMax ? null : <h5>{error.errorLifeSpanMax}</h5>}
                 </div>
                 <div>
                     <h4>Image</h4>
-                    <input type="text" name="image" value={values.image || ''} placeholder=" Image Url" onChange={(e) => validations.validateImage(e.target.value, error, setError, values, setValues)}/>
+                    <input type="text" name="image" value={values.image || ''} placeholder=" Image Url" onChange={(e) => validateImage(e.target.value, error, setError, values, setValues)}/>
                     {!error.errorImage ? null : <h5>{error.errorImage}</h5>}
                 </div>
                 <h4>Select the Temperaments</h4>
