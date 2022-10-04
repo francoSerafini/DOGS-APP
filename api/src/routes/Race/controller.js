@@ -16,23 +16,19 @@ const image = function(dog) {
 };
 
 const apiFindDogById = async function(id) {
-    let dog;
-    await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
-            .then(response => response.data)
-            .then(data => {
-                dog = data.find(dog => dog.id == id);
-            });
-            if (dog) {
-                dog = {
-                    name: dog.name,
-                    height: dog.height.metric,
-                    weight: dog.weight.metric,
-                    life_span: dog.life_span,
-                    temperaments: dog.temperament,
-                    image: dog.image ? dog.image.url : 'Not Found'
-                };
+    let dog = await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+    dog = dog.data.find(dog => dog.id == id);
+        if (dog) {
+            dog = {
+                name: dog.name,
+                height: dog.height.metric,
+                weight: dog.weight.metric,
+                life_span: dog.life_span,
+                temperaments: dog.temperament,
+                image: dog.image ? dog.image.url : 'Not Found'
             };
-            return dog;
+        };
+        return dog;
 };
 
 const concatTemperamentsSingle = function(dog) {
@@ -73,18 +69,14 @@ const concatTemperamentsMulti = function(dogs) {
 
 const apiAllDogs = async function(endPoint) {
     let dogs = [];
-    await axios(endPoint)
-    .then(response => response.data)
-    .then(data => {
-        data.map(dog => dogs.push({
-            id: dog.id,
-            name: dog.name,
-            weight: dog.weight.metric,
-            temperaments: dog.temperament,
-            image : image(dog)
-            }),
-        );
-    });
+    let apiData = await axios(endPoint);
+    apiData = apiData.data.map(dog => dogs.push({
+        id: dog.id,
+        name: dog.name,
+        weight: dog.weight.metric,
+        temperaments: dog.temperament,
+        image : image(dog)
+        }));
     return dogs;
 };
 

@@ -2,7 +2,6 @@ const axios = require('axios');
 
 export const GET_DOGS = 'GET_DOGS';
 export const GET_DOG_DETAIL = 'GET_DOG_DETAIL';
-export const CREATE_DOG = 'CREATE_DOG';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 export const ADD_DOGS_FILTERED = 'ADD_DOGS_FILTERED'
 export const ADD_DOG_FAVORITE = 'ADD_DOG_FAVORITE';
@@ -45,20 +44,6 @@ export function getDogDetail(id) {
             });
         })
         .catch(e => alert('ERROR 404: Dog Not Found')));
-    };
-};
-
-export function createDogs(data) {
-    return function(dispatch) {
-        return (axios.post('/dogs', data)
-        .then(data => {
-            dispatch({
-                type: CREATE_DOG,
-                payload: data
-            });
-            return alert('Breed created successfull')
-        })
-        .catch(e => alert('ERROR 400: Not created: ' + e.response.data)));
     };
 };
 
