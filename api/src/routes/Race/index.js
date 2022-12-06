@@ -1,19 +1,23 @@
 const express = require('express');
 
-const dogsController = require('./controller');
+const { getDogById } = require('../Race/controllers/getDogById');
+const { getAllDogs } = require('../Race/controllers/getAllDogs');
+const { postDog } = require('../Race/controllers/postDog');
+const { deleteDog } = require('../Race/controllers/deleteDog');
+const { updateDog } = require('../Race/controllers/updateDog');
 
-const router = express.Router();   
+const router = express.Router();
 
-router.get('/:idRace', dogsController.getDogById);
+router.get('/:idRace', getDogById);
 
-router.put('/:idRace', dogsController.updateDog);
-    
-router.get('/', dogsController.getAllDogs);
+router.put('/:idRace', updateDog);
 
-router.post('/', dogsController.postDog);
+router.get('/', getAllDogs);
 
-router.delete('/', dogsController.deleteDog);    
- 
+router.post('/', postDog);
+
+router.delete('/', deleteDog);
+
 module.exports = router;
 
 
