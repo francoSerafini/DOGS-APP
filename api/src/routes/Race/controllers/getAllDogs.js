@@ -2,6 +2,7 @@ require('dotenv').config();
 const { API_KEY } = process.env;
 const { apiAllDogs } = require('../auxFunctions/apiAllDogs');
 const { dbAllDogs } = require('../auxFunctions/dbAllDogs');
+const { dbAllDogsByFilter } = require('../auxFunctions/dbAllDogsByFilter');
 
 const getAllDogs = async (req, res) => {
     let race = req.query.name;
