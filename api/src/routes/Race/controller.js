@@ -3,17 +3,9 @@ const { API_KEY } = process.env;
 const axios = require('axios');
 const { Race, Temperament, Op } = require('../../db');
 const { createTemperaments } = require('../Temperament/controller');
+const { apiAllDogs } = require('../Race/auxFunctions/apiAllDogs')
 
 let cont = 0;   
-
-const image = function(dog) {
-    if (dog.image)
-        return dog.image.url;  
-    else if (dog.reference_image_id)
-        return `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`;
-    else
-        return 'not found';
-};
 
 const apiFindDogById = async function(id) {
     let dog = await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
@@ -67,19 +59,6 @@ const concatTemperamentsMulti = function(dogs) {
     };
 };
 
-const apiAllDogs = async function(endPoint) {
-    let dogs = [];
-    let apiData = await axios(endPoint);
-    apiData = apiData.data.map(dog => dogs.push({
-        id: dog.id,
-        name: dog.name,
-        weight: dog.weight.metric,
-        temperaments: dog.temperament,
-        image : image(dog)
-        }));
-    return dogs;
-};
-
 const dbAllDogsByFilter = async function(filter) {
     let allRacesDb = await Race.findAll({
         where: {
@@ -116,7 +95,7 @@ const dbAllDogs = async function() {
 
 const getDogById = async (req, res) => {
     let id = req.params.idRace;
-    let dog;
+    let dog;   
     try {
         if(!isNaN(id)){  //Si no puede convertir el id lo busca en la API externa
             dog = await apiFindDogById(id);
@@ -135,7 +114,7 @@ const getDogById = async (req, res) => {
 
 const getAllDogs = async (req, res) => {
     let race = req.query.name;
-    let allRaces = [];
+    let allRaces = []; 
     if(race) {
         race = race.toLowerCase().split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
         try {
@@ -214,7 +193,7 @@ const updateDog = async (req, res) => {
         attribute !== 'temperaments' && attribute !== 'image' && attribute !== 'life_span') {
             res.status(400);
             res.send('Invalid atribute');    
-   }else{
+   }else{       
         try {
             Race.update({
                 [attribute]: value
