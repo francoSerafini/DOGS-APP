@@ -27,7 +27,7 @@ const Paginated = (props) => {
         if(firstIndex >= total) return;
         setItems([...props.dogsToShow].splice(firstIndex, 8));
         setCurrentPage(nextPage);
-    };
+    }; 
   
     function prevHandler() {
         const prevPage = currentPage - 1;

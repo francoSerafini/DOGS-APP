@@ -49,7 +49,7 @@ const DogDetail = (props) => {
                                 <h3>Height: {dog.height} Cm</h3>
                                 <h3>weight: {dog.weight} Kg</h3>
                                 <h3>Temperaments: {dog.temperaments}</h3>
-                                <h3>Life Span: {dog.life_span} Years</h3>
+                                <h3>Life Span: {dog.life_span}</h3>
                             </div>
                             <img src={dog.image} alt='Not Found' className="imageDetail"></img>
                             <button className={heart} onClick={ addFavorite }>❤</button>

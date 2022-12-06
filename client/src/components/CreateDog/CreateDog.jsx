@@ -85,7 +85,7 @@ const CreateDog = () => {
             lifeSpanMin:'', lifeSpanMax:'', image:''});    
         setSelectedOptions([]);
         createDogs(newBreed);
-    };
+    }; 
     
 
     return(
