@@ -1,42 +1,13 @@
 require('dotenv').config();
 const { API_KEY } = process.env;
-//const axios = require('axios');
 const { Race, Temperament, Op } = require('../../db');
 const { createTemperaments } = require('../Temperament/controller');
 const { apiAllDogs } = require('../Race/auxFunctions/apiAllDogs');
 const { apiFindDogById } = require('../Race/auxFunctions/apiFindDogById');
+const { concatTemperamentsSingle } = require('../Race/auxFunctions/concatTemperamentsSingle');
+const { dbFindDog } = require('../Race/auxFunctions/dbFindDog');
 
 let cont = 0;   
-
-const concatTemperamentsSingle = function(dog) {
-    let temp = '';
-    for (let i = 0; i < dog.temperaments.length; i++) {
-        if(i < dog.temperaments.length - 1) {
-            temp = temp.concat(dog.temperaments[i].name, ', '); 
-        }
-        else temp = temp.concat(dog.temperaments[i].name); // caso de borde;
-    }
-    dog.dataValues.temperaments = temp;
-}; 
-
-const dbFindDog = async function(id) {
-    let dog;
-    dog = await Race.findOne( ({
-        where: {id: id},
-        attributes: ['name', 'weight', 'height', 'life_span', 'image'],
-        include: [{  
-            model: Temperament,
-            attributes: ['name'],
-            through: {
-                attributes: []
-            }
-        }]
-    }))
-    if(dog) {
-        concatTemperamentsSingle(dog);
-      };
-    return dog;
-};
 
 const concatTemperamentsMulti = function(dogs) {
     for (let i = 0; i < dogs.length; i++) {
