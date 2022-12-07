@@ -1,7 +1,7 @@
 .dogDetail {
     background-image: url('../../wallpaper.jpg');
     background-size: 100vh;
-    height: 130vh;
+    height: 100vh;
 }
 
 .detail {
@@ -25,8 +25,8 @@
     margin-top: 5%;
     margin-bottom: 5%;
     border-radius: 8%;
-    height: 80vh;
-    width: 50%;;
+    height: 50vh;
+    width: 30%;;
 }
 
 .dogName {

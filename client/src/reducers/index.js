@@ -48,7 +48,7 @@ function rootReducer(state = initialState, action) {
                 favoritesDogs: state.favoritesDogs.concat(action.payload)
             };
         
-        case REMOVE_DOG_FAVORITE:
+        case REMOVE_DOG_FAVORITE: 
             return {
                 ...state,
                 favoritesDogs: state.favoritesDogs.filter((dog) => dog !== action.payload)
