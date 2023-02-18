@@ -1,9 +1,8 @@
 .paginated {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 10%;
-    margin-left: 20%;
+    margin-top: 16%;
 }
 
 .navigation {
@@ -13,18 +12,18 @@
     margin-bottom: 50px;
     padding-bottom: 40px;
     border-radius: 50px;
-    margin-left: 20%;
+    margin-left: 33%;
 }
 
 .cards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-left: 6%;
 }
 
 .link {
-    width: 50%;
-    color: black;
+    width: 33%;
     text-decoration: none;
 }
 

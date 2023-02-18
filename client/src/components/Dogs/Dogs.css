@@ -3,7 +3,6 @@
     flex-direction: column;
     background-image: url('../../wallpaper.jpg'); 
     background-size: 100vh;
-    height: 100vh;
 }
 
 .buttons {
